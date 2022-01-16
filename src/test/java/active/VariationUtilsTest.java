@@ -50,4 +50,24 @@ public class VariationUtilsTest {
         Assertions.assertEquals(1, result.size());
         Assertions.assertEquals(testVariation, result.get(0));
     }
+
+    @Test
+    public void filterVariation3BullsTest() {
+        Variation testVariation = Variation.of("1234");
+        VariationResult variationResult = VariationResult.of(3, 0);
+
+        List<Variation> result = VariationsUtils.filterVariations(
+            testVariation,
+            variationResult,
+            Collections.singletonList(testVariation));
+        Assertions.assertEquals(0, result.size());
+
+        Variation okVariation = Variation.of("1238");
+        result = VariationsUtils.filterVariations(
+            testVariation,
+            variationResult,
+            Arrays.asList(testVariation, Variation.of("2345"), okVariation));
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertEquals(okVariation, result.get(0));
+    }
 }

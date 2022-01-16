@@ -49,4 +49,12 @@ public class VariationResult {
     public int hashCode() {
         return Objects.hash(bulls, cows);
     }
+
+    @Override
+    public String toString() {
+        return "VariationResult{" +
+            "bulls=" + bulls +
+            ", cows=" + cows +
+            '}';
+    }
 }
