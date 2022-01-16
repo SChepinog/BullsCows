@@ -49,4 +49,8 @@ public class VariationsUtils {
         }
         return cows;
     }
+
+    static Variation getFirstElement(List<Variation> variationsToTest) {
+        return variationsToTest.get(0);
+    }
 }
