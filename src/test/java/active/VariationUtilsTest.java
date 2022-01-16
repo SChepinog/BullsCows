@@ -13,6 +13,7 @@ public class VariationUtilsTest {
     public void countBullsTest() {
         Assertions.assertAll(
             () -> Assertions.assertEquals(4, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("1234"))),
+            () -> Assertions.assertEquals(2, VariationsUtils.countBulls(Variation.of("3119"), Variation.of("1111"))),
             () -> Assertions.assertEquals(3, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("1233"))),
             () -> Assertions.assertEquals(2, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("3233"))),
             () -> Assertions.assertEquals(1, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("3243"))),
@@ -23,6 +24,7 @@ public class VariationUtilsTest {
     @Test
     public void countCowsTest() {
         Assertions.assertAll(
+            () -> Assertions.assertEquals(2, VariationsUtils.countCows(Variation.of("3119"), Variation.of("1111"))),
             () -> Assertions.assertEquals(0, VariationsUtils.countCows(Variation.of("1234"), Variation.of("1234"))),
             () -> Assertions.assertEquals(1, VariationsUtils.countCows(Variation.of("1234"), Variation.of("1233"))),
             () -> Assertions.assertEquals(2, VariationsUtils.countCows(Variation.of("1234"), Variation.of("3233"))),
