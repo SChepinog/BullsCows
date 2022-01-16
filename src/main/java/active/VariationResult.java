@@ -1,5 +1,7 @@
 package active;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class VariationResult {
@@ -13,6 +15,25 @@ public class VariationResult {
 
     public static VariationResult of(int bulls, int cows) {
         return new VariationResult(bulls, cows);
+    }
+
+    public static List<VariationResult> getAllPossibleResults() {
+        return Arrays.asList(
+            VariationResult.of(0, 0),
+            VariationResult.of(0, 1),
+            VariationResult.of(0, 2),
+            VariationResult.of(0, 3),
+            VariationResult.of(0, 4),
+            VariationResult.of(1, 0),
+            VariationResult.of(1, 1),
+            VariationResult.of(1, 2),
+            VariationResult.of(1, 3),
+            VariationResult.of(2, 0),
+            VariationResult.of(2, 1),
+            VariationResult.of(2, 2),
+            VariationResult.of(3, 0),
+            VariationResult.of(4, 0)
+        );
     }
 
     public int getBulls() {

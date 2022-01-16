@@ -53,4 +53,38 @@ public class VariationsUtils {
     static Variation getFirstElement(List<Variation> variationsToTest) {
         return variationsToTest.get(0);
     }
+
+    static Variation getBestMaxMinChoice(List<Variation> variationsToTest) {
+        List<VariationResult> allVariationResults = VariationResult.getAllPossibleResults();
+        Variation result = variationsToTest.get(0);
+        int maxMin = 0;
+        for (Variation variationToTest : variationsToTest) {
+            int minValue = countMinDiscardedVariations(variationToTest, allVariationResults, variationsToTest);
+            if (minValue > maxMin) {
+                maxMin = minValue;
+                result = variationToTest;
+            }
+        }
+        return result;
+    }
+
+    private static int countMinDiscardedVariations(Variation variationToTest, List<VariationResult> allVariationResults, List<Variation> variationsToTest) {
+        int minVariationCountToDiscard = 10000;
+        for (Variation tempVar : variationsToTest) {
+            long tempMinimum = allVariationResults.stream()
+                .filter(tempVarRes -> hasSameResult(variationToTest, tempVarRes, tempVar))
+                .count();
+
+//            int tempMinimum = 0;
+//            for (VariationResult tempRes: allVariationResults) {
+//                if (hasSameResult(variationToTest, tempRes, tempVar)) {
+//                    tempMinimum ++;
+//                }
+//            }
+            if (minVariationCountToDiscard > tempMinimum) {
+                minVariationCountToDiscard = (int) tempMinimum;
+            }
+        }
+        return minVariationCountToDiscard;
+    }
 }
