@@ -7,8 +7,6 @@ import java.util.stream.IntStream;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import com.sun.xml.internal.txw2.output.DumpSerializer;
-
 public class VariationsUtils {
 
     public static List<Variation> generateAll() {
