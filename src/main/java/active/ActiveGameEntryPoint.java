@@ -17,8 +17,8 @@ public class ActiveGameEntryPoint {
         boolean isSuccessful = false;
         while (!isSuccessful) {
             attempts ++;
-            Variation testVariation = activeGameEntryPoint.getVariationToSuggest();
-            isSuccessful = activeGameEntryPoint.doIteration(testVariation, resultSupplier::getResult);
+            Variation usedVariation = activeGameEntryPoint.getVariationToSuggest();
+            isSuccessful = activeGameEntryPoint.doIteration(usedVariation, resultSupplier::getResult);
         }
         System.out.println("Hooray! It took " + attempts + " attempts!");
 
@@ -28,14 +28,14 @@ public class ActiveGameEntryPoint {
         return leftVariations.get(0);
     }
 
-    private boolean doIteration(Variation testVariation, Supplier<VariationResult> resultSupplier) {
-        logIterationInput(testVariation);
-        suggestVariation(testVariation);
+    private boolean doIteration(Variation usedVariation, Supplier<VariationResult> resultSupplier) {
+        logIterationInput(usedVariation);
+        suggestVariation(usedVariation);
         VariationResult variationResult = resultSupplier.get();
         if (gameIsFinished(variationResult)) {
             return true;
         } else {
-            updateVariations(testVariation, variationResult);
+            updateVariations(usedVariation, variationResult);
             return false;
         }
     }
@@ -44,8 +44,8 @@ public class ActiveGameEntryPoint {
         return variationResult.getBulls() == 4;
     }
 
-    private void updateVariations(Variation testVariation, VariationResult variationResult) {
-        leftVariations = VariationsUtils.filterVariations(testVariation, variationResult, leftVariations);
+    private void updateVariations(Variation usedVariation, VariationResult variationResult) {
+        leftVariations = VariationsUtils.filterVariations(usedVariation, variationResult, leftVariations);
     }
 
     private void suggestVariation(Variation testVariation) {

@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
+import com.sun.xml.internal.txw2.output.DumpSerializer;
+
 public class VariationsUtils {
 
     public static List<Variation> generateAll() {
@@ -41,10 +43,10 @@ public class VariationsUtils {
     static int countCows(@NotNull Variation usedVariation, @NotNull Variation testVariation) {
         int cows = 0;
         for (int i = 0; i < usedVariation.getValue().length(); i++) {
-            for (int j = 0; j < testVariation.getValue().length(); j++) {
-                if (usedVariation.getValue().charAt(i) == testVariation.getValue().charAt(j) && i != j) {
-                    cows++;
-                }
+            if (testVariation.getValue().contains(usedVariation.getValue().substring(i, i + 1))
+                && testVariation.getValue().charAt(i) != usedVariation.getValue().charAt(i)
+            ) {
+                cows++;
             }
         }
         return cows;
