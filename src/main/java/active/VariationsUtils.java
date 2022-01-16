@@ -55,6 +55,10 @@ public class VariationsUtils {
     }
 
     static Variation getBestMaxMinChoice(List<Variation> variationsToTest) {
+        System.out.println("Start to make best choice for " + variationsToTest.size() + " variations");
+        if (variationsToTest.size() == 9999) {
+            return Variation.of("1234");
+        }
         List<VariationResult> allVariationResults = VariationResult.getAllPossibleResults();
         Variation result = variationsToTest.get(0);
         int maxMin = 0;

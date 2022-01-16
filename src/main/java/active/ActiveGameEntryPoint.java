@@ -25,7 +25,8 @@ public class ActiveGameEntryPoint {
     }
 
     private Variation getVariationToSuggest() {
-        return VariationsUtils.getFirstElement(leftVariations);
+        return VariationsUtils.getBestMaxMinChoice(leftVariations);
+//        return VariationsUtils.getFirstElement(leftVariations);
     }
 
     private boolean doIteration(Variation usedVariation, Supplier<VariationResult> resultSupplier) {
