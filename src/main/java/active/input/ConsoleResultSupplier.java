@@ -9,8 +9,12 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
     @Override
     public VariationResult getResult() {
         int bulls = getNumberZeroToFour(Animal.BULLS);
-        int cows = getNumberZeroToFour(Animal.COWS);
+        int cows = variationIsCorrect(bulls) ? 0 : getNumberZeroToFour(Animal.COWS);
         return VariationResult.of(bulls, cows);
+    }
+
+    private boolean variationIsCorrect(int bulls) {
+        return bulls == 4;
     }
 
     private int getNumberZeroToFour(Animal bullsOrCows) {

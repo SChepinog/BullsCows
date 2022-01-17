@@ -30,7 +30,7 @@ public class ActiveGameEntryPoint {
     }
 
     private boolean doIteration(Variation usedVariation, Supplier<VariationResult> resultSupplier) {
-        logIterationInput(usedVariation);
+        logIterationInput();
         suggestVariation(usedVariation);
         VariationResult variationResult = resultSupplier.get();
         if (gameIsFinished(variationResult)) {
@@ -54,9 +54,8 @@ public class ActiveGameEntryPoint {
         System.out.println("Hmm, Is it '" + testVariation.getValue() + "'?");
     }
 
-    private void logIterationInput(Variation testVariation) {
+    private void logIterationInput() {
         System.out.println("-------iteration started--------");
-        System.out.println("test variation is " + testVariation.getValue());
         System.out.println("Left variations: " + leftVariations.size());
     }
 }

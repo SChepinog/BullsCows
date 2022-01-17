@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class VariationsUtils {
 
     public static List<Variation> generateAll() {
-        return IntStream.range(0, 9999)
+        return IntStream.range(0, 10_000)
             .mapToObj(String::valueOf)
             .map(s -> StringUtils.leftPad(s, 4, "0"))
             .map(Variation::of)
@@ -50,13 +50,25 @@ public class VariationsUtils {
         return cows;
     }
 
+    /**
+     * "Stupid" variation chooser, just get first element of left variations
+     *
+     * @param variationsToTest list of left variations
+     * @return first element
+     */
     static Variation getFirstElement(List<Variation> variationsToTest) {
         return variationsToTest.get(0);
     }
 
+    /**
+     * Variation chooser, based on max-min algorithm. Memory demanding
+     *
+     * @param variationsToTest list of left variations
+     * @return best choice
+     */
     static Variation getBestMaxMinChoice(List<Variation> variationsToTest) {
         System.out.println("Start to make best choice for " + variationsToTest.size() + " variations");
-        if (variationsToTest.size() == 9999) {
+        if (variationsToTest.size() == 10_000) { //default first move for best time first suggestion
             return Variation.of("1234");
         }
         List<VariationResult> allVariationResults = VariationResult.getAllPossibleResults();
