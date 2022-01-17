@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class VariationResult {
-    private int bulls;
-    private int cows;
+    private final int bulls;
+    private final int cows;
     private static final List<VariationResult> ALL_POSSIBLE_RESULTS = Arrays.asList(
         VariationResult.of(0, 0),
         VariationResult.of(0, 1),
@@ -41,18 +41,8 @@ public class VariationResult {
         return bulls;
     }
 
-    public VariationResult setBulls(int bulls) {
-        this.bulls = bulls;
-        return this;
-    }
-
     public int getCows() {
         return cows;
-    }
-
-    public VariationResult setCows(int cows) {
-        this.cows = cows;
-        return this;
     }
 
     @Override
