@@ -10,7 +10,13 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
     public VariationResult getResult() {
         int bulls = getNumberZeroToFour(Animal.BULLS);
         int cows = variationIsCorrect(bulls) ? 0 : getNumberZeroToFour(Animal.COWS);
-        return VariationResult.of(bulls, cows);
+        VariationResult inputResult = VariationResult.of(bulls, cows);
+        if (VariationResult.getAllPossibleResults().contains(inputResult)) {
+            return inputResult;
+        } else {
+            System.out.println("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");
+            return getResult();
+        }
     }
 
     private boolean variationIsCorrect(int bulls) {
