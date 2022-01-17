@@ -24,8 +24,23 @@ public class VariationsUtils {
     }
 
     static boolean hasSameResult(Variation usedVariation, @NotNull VariationResult result, Variation testVariation) {
-        VariationResult testResult = new VariationResult(countBulls(usedVariation, testVariation), countCows(usedVariation, testVariation));
+        VariationResult testResult = countBullsAndCows(usedVariation, testVariation);
         return result.equals(testResult);
+    }
+
+    static VariationResult countBullsAndCows(Variation usedVariation, Variation testVariation) {
+        int bulls = 0;
+        int cows = 0;
+        for (int i = 0; i < usedVariation.getValue().length(); i++) {
+            if (testVariation.getValue().contains(usedVariation.getValue().substring(i, i + 1))) {
+                if (testVariation.getValue().charAt(i) == usedVariation.getValue().charAt(i)) {
+                    bulls++;
+                } else {
+                    cows++;
+                }
+            }
+        }
+        return VariationResult.of(bulls, cows);
     }
 
     static int countBulls(@NotNull Variation usedVariation, @NotNull Variation testVariation) {
@@ -68,6 +83,7 @@ public class VariationsUtils {
      */
     static Variation getBestMaxMinChoice(List<Variation> variationsToTest) {
         System.out.println("Start to make best choice for " + variationsToTest.size() + " variations");
+//        long millisStart = System.currentTimeMillis();
         if (variationsToTest.size() == 10_000) { //default first move for best time first suggestion
             return Variation.of("1234");
         }
@@ -75,12 +91,15 @@ public class VariationsUtils {
         Variation result = variationsToTest.get(0);
         int maxMin = 0;
         for (Variation variationToTest : variationsToTest) {
+//            long millisForVariation = System.currentTimeMillis();
             int minValue = countMinDiscardedVariations(variationToTest, allVariationResults, variationsToTest);
             if (minValue > maxMin) {
                 maxMin = minValue;
                 result = variationToTest;
             }
+//            System.out.println("Processed one variation in " + (System.currentTimeMillis() - millisForVariation) + " millis");
         }
+//        System.out.println("Best choice for " + variationsToTest.size() + " found in " + (System.currentTimeMillis() - millisStart) + " millis");
         return result;
     }
 

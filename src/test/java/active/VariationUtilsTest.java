@@ -34,6 +34,12 @@ public class VariationUtilsTest {
     }
 
     @Test
+    public void countBullsAndCowsTest() {
+        Assertions.assertEquals(VariationResult.of(2, 2), VariationsUtils.countBullsAndCows(Variation.of("1111"), Variation.of("3119")));
+        Assertions.assertEquals(VariationResult.of(2, 1), VariationsUtils.countBullsAndCows(Variation.of("1112"), Variation.of("3119")));
+    }
+
+    @Test
     public void filterVariation4BullsTest() {
         Variation testVariation = Variation.of("1234");
         VariationResult variationResult = VariationResult.of(4, 0);
