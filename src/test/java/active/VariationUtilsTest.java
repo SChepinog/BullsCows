@@ -11,26 +11,22 @@ public class VariationUtilsTest {
 
     @Test
     public void countBullsTest() {
-        Assertions.assertAll(
-            () -> Assertions.assertEquals(2, VariationsUtils.countBulls(Variation.of("1111"), Variation.of("3119"))),
-            () -> Assertions.assertEquals(4, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("1234"))),
-            () -> Assertions.assertEquals(3, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("1233"))),
-            () -> Assertions.assertEquals(2, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("3233"))),
-            () -> Assertions.assertEquals(1, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("3243"))),
-            () -> Assertions.assertEquals(0, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("4321")))
-        );
+        Assertions.assertEquals(2, VariationsUtils.countBulls(Variation.of("1111"), Variation.of("3119")));
+        Assertions.assertEquals(4, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("1234")));
+        Assertions.assertEquals(3, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("1233")));
+        Assertions.assertEquals(2, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("3233")));
+        Assertions.assertEquals(1, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("3243")));
+        Assertions.assertEquals(0, VariationsUtils.countBulls(Variation.of("1234"), Variation.of("4321")));
     }
 
     @Test
     public void countCowsTest() {
-        Assertions.assertAll(
-            () -> Assertions.assertEquals(2, VariationsUtils.countCows(Variation.of("1111"), Variation.of("3119"))),
-            () -> Assertions.assertEquals(0, VariationsUtils.countCows(Variation.of("1234"), Variation.of("1234"))),
-            () -> Assertions.assertEquals(1, VariationsUtils.countCows(Variation.of("1233"), Variation.of("1234"))),
-            () -> Assertions.assertEquals(2, VariationsUtils.countCows(Variation.of("3233"), Variation.of("1234"))),
-            () -> Assertions.assertEquals(3, VariationsUtils.countCows(Variation.of("3243"), Variation.of("1234"))),
-            () -> Assertions.assertEquals(4, VariationsUtils.countCows(Variation.of("4321"), Variation.of("1234")))
-        );
+        Assertions.assertEquals(2, VariationsUtils.countCows(Variation.of("1111"), Variation.of("3119")));
+        Assertions.assertEquals(0, VariationsUtils.countCows(Variation.of("1234"), Variation.of("1234")));
+        Assertions.assertEquals(1, VariationsUtils.countCows(Variation.of("1233"), Variation.of("1234")));
+        Assertions.assertEquals(2, VariationsUtils.countCows(Variation.of("3233"), Variation.of("1234")));
+        Assertions.assertEquals(3, VariationsUtils.countCows(Variation.of("3243"), Variation.of("1234")));
+        Assertions.assertEquals(4, VariationsUtils.countCows(Variation.of("4321"), Variation.of("1234")));
     }
 
     @Test
