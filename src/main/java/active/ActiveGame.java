@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ActiveGame {
-    List<Variation> leftVariations;
-    int attempts;
+    private List<Variation> leftVariations;
+    private int attempts;
     private boolean isFinished = false;
 
     public ActiveGame() {
@@ -14,11 +14,11 @@ public class ActiveGame {
     }
 
     public Variation getBestMaxMinVariation() {
-        return VariationsUtils.getBestMaxMinChoice(leftVariations);
+        return VariationChooser.getBestMaxMinChoice(leftVariations);
     }
 
     public Variation getFirstResult() {
-        return VariationsUtils.getFirstElement(leftVariations);
+        return VariationChooser.getFirstElement(leftVariations);
     }
 
     public void doIteration(Supplier<Variation> variationSupplier, Supplier<VariationResult> resultSupplier) {
