@@ -7,6 +7,22 @@ import java.util.Objects;
 public class VariationResult {
     private int bulls;
     private int cows;
+    private static final List<VariationResult> ALL_POSSIBLE_RESULTS = Arrays.asList(
+        VariationResult.of(0, 0),
+        VariationResult.of(0, 1),
+        VariationResult.of(0, 2),
+        VariationResult.of(0, 3),
+        VariationResult.of(0, 4),
+        VariationResult.of(1, 0),
+        VariationResult.of(1, 1),
+        VariationResult.of(1, 2),
+        VariationResult.of(1, 3),
+        VariationResult.of(2, 0),
+        VariationResult.of(2, 1),
+        VariationResult.of(2, 2),
+        VariationResult.of(3, 0),
+        VariationResult.of(4, 0)
+    );
 
     public VariationResult(int bulls, int cows) {
         this.bulls = bulls;
@@ -18,22 +34,7 @@ public class VariationResult {
     }
 
     public static List<VariationResult> getAllPossibleResults() {
-        return Arrays.asList(
-            VariationResult.of(0, 0),
-            VariationResult.of(0, 1),
-            VariationResult.of(0, 2),
-            VariationResult.of(0, 3),
-            VariationResult.of(0, 4),
-            VariationResult.of(1, 0),
-            VariationResult.of(1, 1),
-            VariationResult.of(1, 2),
-            VariationResult.of(1, 3),
-            VariationResult.of(2, 0),
-            VariationResult.of(2, 1),
-            VariationResult.of(2, 2),
-            VariationResult.of(3, 0),
-            VariationResult.of(4, 0)
-        );
+        return ALL_POSSIBLE_RESULTS;
     }
 
     public int getBulls() {

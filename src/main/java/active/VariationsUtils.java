@@ -18,7 +18,7 @@ public class VariationsUtils {
     }
 
     public static List<Variation> filterVariations(Variation usedVariation, VariationResult result, @NotNull List<Variation> leftVariations) {
-        return leftVariations.parallelStream()
+        return leftVariations.stream()
             .filter(v -> hasSameResult(usedVariation, result, v))
             .collect(Collectors.toList());
     }
@@ -90,13 +90,6 @@ public class VariationsUtils {
             long tempMinimum = allVariationResults.stream()
                 .filter(tempVarRes -> hasSameResult(variationToTest, tempVarRes, tempVar))
                 .count();
-
-//            int tempMinimum = 0;
-//            for (VariationResult tempRes: allVariationResults) {
-//                if (hasSameResult(variationToTest, tempRes, tempVar)) {
-//                    tempMinimum ++;
-//                }
-//            }
             if (minVariationCountToDiscard > tempMinimum) {
                 minVariationCountToDiscard = (int) tempMinimum;
             }
