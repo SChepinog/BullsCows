@@ -28,7 +28,7 @@ public class VariationsUtils {
         return result.equals(testResult);
     }
 
-    static VariationResult countBullsAndCows(Variation usedVariation, Variation testVariation) {
+    static @NotNull VariationResult countBullsAndCows(@NotNull Variation usedVariation, @NotNull Variation testVariation) {
         int bulls = 0;
         int cows = 0;
         for (int i = 0; i < usedVariation.getValue().length(); i++) {
@@ -71,7 +71,7 @@ public class VariationsUtils {
      * @param variationsToTest list of left variations
      * @return first element
      */
-    static Variation getFirstElement(List<Variation> variationsToTest) {
+    static Variation getFirstElement(@NotNull List<Variation> variationsToTest) {
         return variationsToTest.get(0);
     }
 
@@ -81,7 +81,7 @@ public class VariationsUtils {
      * @param variationsToTest list of left variations
      * @return best choice
      */
-    static Variation getBestMaxMinChoice(List<Variation> variationsToTest) {
+    static Variation getBestMaxMinChoice(@NotNull List<Variation> variationsToTest) {
         System.out.println("Start to make best choice for " + variationsToTest.size() + " variations");
 //        long millisStart = System.currentTimeMillis();
         if (variationsToTest.size() == 10_000) { //default first move for best time first suggestion
