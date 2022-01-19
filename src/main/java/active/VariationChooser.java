@@ -28,24 +28,24 @@ public class VariationChooser {
      */
     public static Variation getBestMaxMinChoice(@NotNull List<Variation> variationsToTest) {
         System.out.println("Start to make best choice for " + variationsToTest.size() + " variations");
-        Timer allVariations = new Timer("beestMaxMinChoice for " + variationsToTest.size() + " variations");
+        Timer allVariationsTimer = new Timer("beestMaxMinChoice for " + variationsToTest.size() + " variations");
         if (variationsToTest.size() == 10_000) { //default first move for best time first suggestion
             return Variation.of("1234");
         }
-        allVariations.start();
+        allVariationsTimer.start();
         List<VariationResult> allVariationResults = VariationResult.getAllPossibleResults();
         Variation result = variationsToTest.get(0);
         int maxMin = 0;
         for (Variation variationToTest : variationsToTest) {
-//            long millisForVariation = System.currentTimeMillis();
+//            Timer oneVariationTimer = new Timer("minForOneVariation");
             int minValue = countMinDiscardedVariations(variationToTest, allVariationResults, variationsToTest);
             if (minValue > maxMin) {
                 maxMin = minValue;
                 result = variationToTest;
             }
-//            System.out.println("Processed one variation in " + (System.currentTimeMillis() - millisForVariation) + " millis");
+//            System.out.println(oneVariationTimer.stopAndGetElapsedTimeAsString());
         }
-        System.out.println(allVariations.stop().getElapsedTimeAsString());
+        System.out.println(allVariationsTimer.stopAndGetElapsedTimeAsString());
         return result;
     }
 

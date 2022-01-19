@@ -23,7 +23,10 @@ public class Timer {
         return this;
     }
 
-    public String getElapsedTimeAsString() {
+    public String stopAndGetElapsedTimeAsString() {
+        if (stopMillis == 0) {
+            stop();
+        }
         Duration duration = Duration.ofMillis(stopMillis - startMillis);
         return getDurationAsString(duration);
     }
