@@ -10,7 +10,7 @@ public class Main {
         VariationResultSupplier resultSupplier = new ConsoleResultSupplier();
 
         while (!activeGame.isFinished()) {
-            activeGame.doIteration(activeGame::getBestMaxMinVariation, resultSupplier::getResult);
+            activeGame.doIteration(activeGame::getBestMaxMinVariation, resultSupplier);
         }
         activeGame.doCongratulations();
     }

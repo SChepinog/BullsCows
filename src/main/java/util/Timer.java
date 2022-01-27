@@ -4,11 +4,8 @@ import java.time.Duration;
 
 public class Timer {
 
-    private String name;
+    private final String name;
     private long startMillis;
-    private long stopMillis;
-
-    public Timer() {}
 
     public Timer(String name) {
         this.name = name;
@@ -18,16 +15,8 @@ public class Timer {
         startMillis = System.currentTimeMillis();
     }
 
-    public Timer stop() {
-        stopMillis = System.currentTimeMillis();
-        return this;
-    }
-
     public String stopAndGetElapsedTimeAsString() {
-        if (stopMillis == 0) {
-            stop();
-        }
-        Duration duration = Duration.ofMillis(stopMillis - startMillis);
+        Duration duration = Duration.ofMillis(System.currentTimeMillis() - startMillis);
         return getDurationAsString(duration);
     }
 

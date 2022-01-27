@@ -3,6 +3,8 @@ package active;
 import java.util.List;
 import java.util.function.Supplier;
 
+import active.input.VariationResultSupplier;
+
 public class ActiveGame {
     private List<Variation> leftVariations;
     private int attempts;
@@ -21,12 +23,12 @@ public class ActiveGame {
         return VariationChooser.getFirstElement(leftVariations);
     }
 
-    public void doIteration(Supplier<Variation> variationSupplier, Supplier<VariationResult> resultSupplier) {
+    public void doIteration(Supplier<Variation> variationSupplier, VariationResultSupplier resultSupplier) {
         Variation usedVariation = variationSupplier.get();
         logIterationInput();
         increaseAttempts();
         suggestVariation(usedVariation);
-        VariationResult variationResult = resultSupplier.get();
+        VariationResult variationResult = resultSupplier.getResult();
         if (variationWasCorrect(variationResult)) {
             isFinished = true;
         } else {
