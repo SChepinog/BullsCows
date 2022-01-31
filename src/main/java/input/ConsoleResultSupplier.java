@@ -1,11 +1,18 @@
-package active.input;
+package input;
 
 import java.util.Scanner;
 
-import active.Animal;
-import active.VariationResult;
+import game.active.Animal;
+import game.active.VariationResult;
+import output.MessageSender;
 
 public class ConsoleResultSupplier implements VariationResultSupplier {
+    private final MessageSender messageSender;
+
+    public ConsoleResultSupplier(MessageSender messageSender) {
+        this.messageSender = messageSender;
+    }
+
     @Override
     public VariationResult getResult() {
         int bulls = getNumberZeroToFour(Animal.BULLS);
@@ -14,7 +21,7 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
         if (VariationResult.getAllPossibleResults().contains(inputResult)) {
             return inputResult;
         } else {
-            System.out.println("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");
+            messageSender.sendMessage("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");
             return getResult();
         }
     }
@@ -24,10 +31,10 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
     }
 
     private int getNumberZeroToFour(Animal bullsOrCows) {
-        System.out.println("Enter number of " + bullsOrCows.getReadableName());
+        messageSender.sendMessage("Enter number of " + bullsOrCows.getReadableName());
         int count = getIntFromConsole();
         if (count < 0 || count > 4) {
-            System.out.println("You entered wrong number, it should be from 0 to 4 inclusive");
+            messageSender.sendMessage("You entered wrong number, it should be from 0 to 4 inclusive");
             return getNumberZeroToFour(bullsOrCows);
         } else {
             return count;
@@ -42,7 +49,7 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
             result = Integer.parseInt(suggestion);
             return result;
         } catch (Exception exception) {
-            System.out.println("You entered wrong value. It should be a number");
+            messageSender.sendMessage("You entered wrong value. It should be a number");
             return getIntFromConsole();
         }
     }

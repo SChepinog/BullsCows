@@ -1,29 +1,31 @@
-package active;
+package game.active;
 
 import java.util.List;
 import java.util.function.Supplier;
 
-import active.input.VariationResultSupplier;
+import input.VariationResultSupplier;
+import output.MessageSender;
 
 public class ActiveGame {
     private List<Variation> leftVariations;
     private int attempts;
     private boolean isFinished = false;
+    private final VariationResultSupplier resultSupplier;
+    private final MessageSender messageSender;
+    private Supplier<Variation> variationSupplier = () -> VariationChooser.getBestMaxMinChoice(leftVariations);
 
-    public ActiveGame() {
-        this.leftVariations = VariationsUtils.generateAll();
+    public ActiveGame(VariationResultSupplier resultSupplier, MessageSender messageSender) {
+        this.resultSupplier = resultSupplier;
+        this.messageSender = messageSender;
+        this.leftVariations = VariationsUtils.generateAllVariations();
         this.attempts = 0;
     }
 
-    public Variation getBestMaxMinVariation() {
-        return VariationChooser.getBestMaxMinChoice(leftVariations);
+    public void setVariationSupplier(Supplier<Variation> variationSupplier) {
+        this.variationSupplier = variationSupplier;
     }
 
-    public Variation getFirstResult() {
-        return VariationChooser.getFirstElement(leftVariations);
-    }
-
-    public void doIteration(Supplier<Variation> variationSupplier, VariationResultSupplier resultSupplier) {
+    public void doIteration() {
         Variation usedVariation = variationSupplier.get();
         logIterationInput();
         increaseAttempts();
@@ -49,8 +51,8 @@ public class ActiveGame {
     }
 
     private void suggestVariation(Variation testVariation) {
-        System.out.print(attempts + " attempt. ");
-        System.out.println("Hmm, Is it '" + testVariation.getValue() + "'?");
+        messageSender.sendMessage(attempts + " attempt. ");
+        messageSender.sendMessage("Hmm, Is it '" + testVariation.getValue() + "'?");
     }
 
     private void logIterationInput() {
@@ -59,10 +61,14 @@ public class ActiveGame {
     }
 
     public void doCongratulations() {
-        System.out.println("Hooray! It took " + attempts + " attempts!");
+        messageSender.sendMessage("Hooray! It took " + attempts + " attempts!");
     }
 
     public boolean isFinished() {
         return this.isFinished;
+    }
+
+    public void begin() {
+        messageSender.sendMessage("OK, let's go!");
     }
 }

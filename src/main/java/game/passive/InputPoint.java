@@ -1,8 +1,8 @@
-package passive;
+package game.passive;
 
 import java.util.Scanner;
 
-import common.GameSpec;
+import game.common.GameSpec;
 
 public class InputPoint {
 

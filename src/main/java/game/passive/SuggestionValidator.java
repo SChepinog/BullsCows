@@ -1,9 +1,9 @@
-package passive;
+package game.passive;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import common.GameSpec;
+import game.common.GameSpec;
 
 public class SuggestionValidator {
 

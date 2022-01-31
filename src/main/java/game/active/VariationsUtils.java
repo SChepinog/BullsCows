@@ -1,4 +1,4 @@
-package active;
+package game.active;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class VariationsUtils {
 
-    public static List<Variation> generateAll() {
+    public static List<Variation> generateAllVariations() {
         return IntStream.range(0, 10_000)
             .mapToObj(String::valueOf)
             .map(s -> StringUtils.leftPad(s, 4, "0"))

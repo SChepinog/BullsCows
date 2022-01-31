@@ -1,4 +1,4 @@
-package active;
+package game.active;
 
 public class Variation {
 

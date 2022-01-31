@@ -24,9 +24,6 @@ public class Timer {
         long minutes = duration.getSeconds() / 60;
         long seconds = duration.getSeconds() % 60;
         long millis = duration.getNano() / 1_000_000;
-        return "Timer" + (name == null ? "" : (" for " + name)) + " worked for "
-            + minutes + " minutes, "
-            + seconds + " seconds, "
-            + millis + " millis";
+        return String.format("Timer for %s worked for %d minutes, %d seconds, %d millis", name, minutes, seconds, millis);
     }
 }

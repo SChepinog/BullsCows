@@ -1,8 +1,8 @@
-package passive;
+package game.passive;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import common.GameSpec;
+import game.common.GameSpec;
 
 public class SecretGenerator {
 

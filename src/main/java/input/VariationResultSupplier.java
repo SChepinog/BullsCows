@@ -1,6 +1,6 @@
-package active.input;
+package input;
 
-import active.VariationResult;
+import game.active.VariationResult;
 
 public interface VariationResultSupplier {
 

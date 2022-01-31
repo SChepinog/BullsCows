@@ -1,12 +1,10 @@
-package active;
+package game.active;
 
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
 import util.Timer;
-
-import static active.VariationsUtils.hasSameResult;
 
 public class VariationChooser {
 
@@ -28,22 +26,23 @@ public class VariationChooser {
      */
     public static Variation getBestMaxMinChoice(@NotNull List<Variation> variationsToTest) {
         System.out.println("Start to make best choice for " + variationsToTest.size() + " variations");
-        Timer allVariationsTimer = new Timer("beestMaxMinChoice for " + variationsToTest.size() + " variations");
+        Timer allVariationsTimer = new Timer("bestMaxMinChoice for " + variationsToTest.size() + " variations");
         if (variationsToTest.size() == 10_000) { //default first move for best time first suggestion
             return Variation.of("1234");
+        }
+        if (variationsToTest.size() == 1) {
+            return variationsToTest.get(0);
         }
         allVariationsTimer.start();
         List<VariationResult> allVariationResults = VariationResult.getAllPossibleResults();
         Variation result = variationsToTest.get(0);
         int maxMin = 0;
         for (Variation variationToTest : variationsToTest) {
-//            Timer oneVariationTimer = new Timer("minForOneVariation");
             int minValue = countMinDiscardedVariations(variationToTest, allVariationResults, variationsToTest);
             if (minValue > maxMin) {
                 maxMin = minValue;
                 result = variationToTest;
             }
-//            System.out.println(oneVariationTimer.stopAndGetElapsedTimeAsString());
         }
         System.out.println(allVariationsTimer.stopAndGetElapsedTimeAsString());
         return result;
@@ -53,10 +52,13 @@ public class VariationChooser {
         int minVariationCountToDiscard = 10000;
         for (Variation tempVar : variationsToTest) {
             long tempMinimum = allVariationResults.stream()
-                .filter(tempVarRes -> hasSameResult(variationToTest, tempVarRes, tempVar))
+                .filter(tempVarRes -> VariationsUtils.hasSameResult(variationToTest, tempVarRes, tempVar))
                 .count();
             if (minVariationCountToDiscard > tempMinimum) {
                 minVariationCountToDiscard = (int) tempMinimum;
+            }
+            if (minVariationCountToDiscard == 0) {
+                break;
             }
         }
         return minVariationCountToDiscard;
