@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         MessageSender messageSender = new ConsoleMessageSender();
         VariationResultSupplier resultSupplier = new ConsoleResultSupplier(messageSender);
-        ActiveGame activeGame = new ActiveGame(resultSupplier, messageSender);
+        ActiveGame activeGame = new ActiveBullsCowsGame(resultSupplier, messageSender);
         activeGame.begin();
         while (!activeGame.isFinished()) {
             activeGame.doIteration();
