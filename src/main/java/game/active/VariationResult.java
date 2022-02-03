@@ -21,6 +21,7 @@ public class VariationResult {
         VariationResult.of(2, 1),
         VariationResult.of(2, 2),
         VariationResult.of(3, 0),
+        VariationResult.of(3, 1),
         VariationResult.of(4, 0)
     );
 
