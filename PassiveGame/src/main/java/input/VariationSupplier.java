@@ -4,5 +4,5 @@ import game.common.Variation;
 
 public interface VariationSupplier {
 
-    public Variation getVariation();
+    Variation getVariation();
 }

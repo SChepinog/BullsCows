@@ -11,7 +11,7 @@ public class ConsoleVariationSupplier implements VariationSupplier {
     public Variation getVariation() {
         String result = getStringFromConsole();
         while (!SuggestionValidator.isValid(result)) {
-            System.out.printf("You entered incorrect variation. It should be consisted of %d digits%nTry again", GameSpec.LENGTH);
+            System.out.printf("You entered incorrect variation. It should be consisted of %d digits%nTry again%n", GameSpec.LENGTH);
             result = getStringFromConsole();
         }
         return Variation.of(result);

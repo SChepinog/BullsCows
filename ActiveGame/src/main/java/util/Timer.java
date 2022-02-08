@@ -5,18 +5,18 @@ import java.time.Duration;
 public class Timer {
 
     private final String name;
-    private long startMillis;
+    private long startNanos;
 
     public Timer(String name) {
         this.name = name;
     }
 
     public void start() {
-        startMillis = System.currentTimeMillis();
+        startNanos = System.nanoTime();
     }
 
     public String stopAndGetElapsedTimeAsString() {
-        Duration duration = Duration.ofMillis(System.currentTimeMillis() - startMillis);
+        Duration duration = Duration.ofNanos(System.nanoTime() - startNanos);
         return getDurationAsString(duration);
     }
 
