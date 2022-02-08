@@ -1,7 +1,6 @@
 package game.active;
 
 import java.util.List;
-import java.util.OptionalInt;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -48,11 +47,10 @@ public class VariationChooser {
     }
 
     private static int countMinDiscardedVariations(Variation variationToTest, List<Variation> variationsToTest) {
-        OptionalInt minDiscardedVariations = VariationResult.getAllPossibleResults().parallelStream()
+        return VariationResult.getAllPossibleResults().parallelStream()
             .mapToInt(result -> (int) variationsToTest.parallelStream()
                 .filter(v -> !VariationsUtils.hasSameResult(variationToTest, result, v))
                 .count())
-            .min();
-        return minDiscardedVariations.orElse(0);
+            .min().orElse(0);
     }
 }
