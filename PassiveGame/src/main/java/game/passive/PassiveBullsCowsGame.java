@@ -2,13 +2,14 @@ package game.passive;
 
 import org.jetbrains.annotations.NotNull;
 
+import connector.FullConnector;
+import connector.ResultConsumer;
+import connector.VariationSupplier;
 import game.common.Game;
 import game.common.GameSpec;
 import game.common.Variation;
 import game.common.VariationResult;
 import game.common.VariationsUtils;
-import input.VariationSupplier;
-import output.ResultConsumer;
 
 public class PassiveBullsCowsGame implements Game {
     private int attempts = 0;
@@ -16,6 +17,10 @@ public class PassiveBullsCowsGame implements Game {
     private final Variation secret = SecretGenerator.create();
     private final VariationSupplier variationSupplier;
     private final ResultConsumer resultConsumer;
+
+    public PassiveBullsCowsGame(FullConnector connector) {
+        this(connector, connector);
+    }
 
     public PassiveBullsCowsGame(VariationSupplier variationSupplier, ResultConsumer resultConsumer) {
         this.variationSupplier = variationSupplier;

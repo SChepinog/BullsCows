@@ -1,5 +1,6 @@
-package output;
+package connector.output;
 
+import connector.MessageSender;
 import game.common.Variation;
 
 public class ConsoleMessageSender implements MessageSender {

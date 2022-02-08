@@ -1,15 +1,12 @@
 package game.passive;
 
-import rmi.RmiConnectorAdapter;
+import connector.rmi.RmiConnectorAdapter;
 
 public class PassiveMain {
 
     public static void main(String[] args) throws InterruptedException {
-//        VariationSupplier variationSupplier = new ConsoleVariationSupplier();
-//        ResultConsumer resultConsumer = new ConsoleResultConsumer();
-//        PassiveBullsCowsGame passiveGame = new PassiveBullsCowsGame(variationSupplier, resultConsumer);
-
-        PassiveBullsCowsGame passiveGame = new PassiveBullsCowsGame(RmiConnectorAdapter.INSTANCE, RmiConnectorAdapter.INSTANCE);
+//        PassiveBullsCowsGame pGame = new PassiveBullsCowsGame(new ConsoleConnector());
+        PassiveBullsCowsGame passiveGame = new PassiveBullsCowsGame(RmiConnectorAdapter.INSTANCE);
         passiveGame.doFullGame();
         Thread.sleep(200);
         System.exit(30);

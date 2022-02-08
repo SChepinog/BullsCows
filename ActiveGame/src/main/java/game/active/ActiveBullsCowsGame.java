@@ -3,12 +3,13 @@ package game.active;
 import java.util.List;
 import java.util.function.Supplier;
 
+import connector.FullConnector;
+import connector.MessageSender;
+import connector.VariationResultSupplier;
 import game.common.Game;
 import game.common.Variation;
 import game.common.VariationResult;
 import game.common.VariationsUtils;
-import input.VariationResultSupplier;
-import output.MessageSender;
 
 public class ActiveBullsCowsGame implements Game {
     private List<Variation> leftVariations;
@@ -17,6 +18,10 @@ public class ActiveBullsCowsGame implements Game {
     private final VariationResultSupplier resultSupplier;
     private final MessageSender messageSender;
     private Supplier<Variation> variationSupplier = () -> VariationChooser.getBestMaxMinChoice(leftVariations);
+
+    public ActiveBullsCowsGame(FullConnector connector) {
+        this(connector, connector);
+    }
 
     public ActiveBullsCowsGame(VariationResultSupplier resultSupplier, MessageSender messageSender) {
         this.resultSupplier = resultSupplier;

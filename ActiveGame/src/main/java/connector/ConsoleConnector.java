@@ -1,18 +1,13 @@
-package input;
+package connector;
 
 import java.util.Scanner;
 
 import game.active.Animal;
+import game.common.Variation;
 import game.common.VariationResult;
 import game.common.VariationsUtils;
-import output.MessageSender;
 
-public class ConsoleResultSupplier implements VariationResultSupplier {
-    private final MessageSender messageSender;
-
-    public ConsoleResultSupplier(MessageSender messageSender) {
-        this.messageSender = messageSender;
-    }
+public class ConsoleConnector implements FullConnector {
 
     @Override
     public VariationResult getResult() {
@@ -22,7 +17,7 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
         if (VariationsUtils.getAllPossibleResults().contains(inputResult)) {
             return inputResult;
         } else {
-            messageSender.sendMessage("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");
+            System.out.println("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");
             return getResult();
         }
     }
@@ -32,10 +27,10 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
     }
 
     private int getNumberZeroToFour(Animal bullsOrCows) {
-        messageSender.sendMessage("Enter number of " + bullsOrCows.getReadableName());
+        System.out.println("Enter number of " + bullsOrCows.getReadableName());
         int count = getIntFromConsole();
         if (count < 0 || count > 4) {
-            messageSender.sendMessage("You entered wrong number, it should be from 0 to 4 inclusive");
+            System.out.println("You entered wrong number, it should be from 0 to 4 inclusive");
             return getNumberZeroToFour(bullsOrCows);
         } else {
             return count;
@@ -50,8 +45,18 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
             result = Integer.parseInt(suggestion);
             return result;
         } catch (Exception exception) {
-            messageSender.sendMessage("You entered wrong value. It should be a number");
+            System.out.println("You entered wrong value. It should be a number");
             return getIntFromConsole();
         }
+    }
+
+    @Override
+    public void sendMessage(String messageToSend) {
+        System.err.println(messageToSend);
+    }
+
+    @Override
+    public void sendVariation(Variation variation) {
+        System.err.println("Is it " + variation.getValue() + " ?");
     }
 }

@@ -1,4 +1,4 @@
-package rmi;
+package connector.rmi;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
@@ -7,12 +7,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import connector.FullConnector;
 import game.common.Variation;
 import game.common.VariationResult;
-import input.VariationSupplier;
-import output.ResultConsumer;
 
-public class RmiConnectorAdapter implements RmiConnector, VariationSupplier, ResultConsumer {
+public class RmiConnectorAdapter implements RmiConnector, FullConnector {
 
     public static final RmiConnectorAdapter INSTANCE = new RmiConnectorAdapter();
     private static final String UNIQUE_BINDING_NAME = "bulls.cows";

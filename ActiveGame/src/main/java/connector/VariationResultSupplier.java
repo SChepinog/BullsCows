@@ -1,4 +1,4 @@
-package input;
+package connector;
 
 import game.common.VariationResult;
 

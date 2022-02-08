@@ -1,16 +1,13 @@
 package game.active;
 
+import connector.rmi.RmiConnectorAdapter;
 import game.common.Game;
-import rmi.RmiConnectorAdapter;
 
 public class ActiveMain {
 
     public static void main(String[] args) {
-//        MessageSender messageSender = new ConsoleMessageSender();
-//        VariationResultSupplier resultSupplier = new ConsoleResultSupplier(messageSender);
-//        Game activeGame = new ActiveBullsCowsGame(resultSupplier, messageSender);
-
-        Game activeGame = new ActiveBullsCowsGame(RmiConnectorAdapter.INSTANCE, RmiConnectorAdapter.INSTANCE);
+//        Game activeGame = new ActiveBullsCowsGame(new ConsoleConnector());
+        Game activeGame = new ActiveBullsCowsGame(RmiConnectorAdapter.INSTANCE);
         activeGame.doFullGame();
     }
 }

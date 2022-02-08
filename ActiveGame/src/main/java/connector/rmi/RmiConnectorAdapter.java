@@ -1,16 +1,15 @@
-package rmi;
+package connector.rmi;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import connector.FullConnector;
 import game.common.Variation;
 import game.common.VariationResult;
-import input.VariationResultSupplier;
-import output.MessageSender;
 
-public class RmiConnectorAdapter implements MessageSender, VariationResultSupplier {
+public class RmiConnectorAdapter implements FullConnector {
     private static final String UNIQUE_BINDING_NAME = "bulls.cows";
     public static RmiConnectorAdapter INSTANCE = new RmiConnectorAdapter();
     private final RmiConnector connector;
