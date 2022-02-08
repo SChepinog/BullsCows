@@ -1,13 +1,15 @@
 package game.passive;
 
+import rmi.RmiConnectorAdapter;
+
 public class Main {
 
     public static void main(String[] args) {
-        PassiveBullsCowsGame passiveGame = new PassiveBullsCowsGame();
-        passiveGame.begin();
-        while (!passiveGame.isFinished()) {
-            passiveGame.doIteration();
-        }
-        passiveGame.doCongratulations();
+//        VariationSupplier variationSupplier = new ConsoleVariationSupplier();
+//        ResultConsumer resultConsumer = new ConsoleResultConsumer();
+//        PassiveBullsCowsGame passiveGame = new PassiveBullsCowsGame(variationSupplier, resultConsumer);
+
+        PassiveBullsCowsGame passiveGame = new PassiveBullsCowsGame(RmiConnectorAdapter.INSTANCE, RmiConnectorAdapter.INSTANCE);
+        passiveGame.doFullGame();
     }
 }

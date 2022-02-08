@@ -7,9 +7,7 @@ import game.common.GameSpec;
 import game.common.Variation;
 import game.common.VariationResult;
 import game.common.VariationsUtils;
-import input.ConsoleVariationSupplier;
 import input.VariationSupplier;
-import output.ConsoleResultConsumer;
 import output.ResultConsumer;
 
 public class PassiveBullsCowsGame implements Game {
@@ -19,9 +17,9 @@ public class PassiveBullsCowsGame implements Game {
     private final VariationSupplier variationSupplier;
     private final ResultConsumer resultConsumer;
 
-    public PassiveBullsCowsGame() {
-        this.variationSupplier = new ConsoleVariationSupplier();
-        this.resultConsumer = new ConsoleResultConsumer();
+    public PassiveBullsCowsGame(VariationSupplier variationSupplier, ResultConsumer resultConsumer) {
+        this.variationSupplier = variationSupplier;
+        this.resultConsumer = resultConsumer;
     }
 
     @Override

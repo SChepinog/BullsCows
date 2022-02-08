@@ -1,8 +1,10 @@
 package game.common;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class VariationResult {
+public class VariationResult implements Serializable {
+
     private final int bulls;
     private final int cows;
 

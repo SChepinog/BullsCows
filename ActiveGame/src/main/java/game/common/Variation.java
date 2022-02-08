@@ -1,6 +1,8 @@
 package game.common;
 
-public class Variation {
+import java.io.Serializable;
+
+public class Variation implements Serializable {
 
     private final String value;
 

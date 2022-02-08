@@ -8,4 +8,12 @@ public interface Game {
     void doIteration();
 
     void doCongratulations();
+
+    default void doFullGame() {
+        this.begin();
+        while (!this.isFinished()) {
+            this.doIteration();
+        }
+        this.doCongratulations();
+    }
 }
