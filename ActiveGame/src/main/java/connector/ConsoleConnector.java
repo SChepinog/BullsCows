@@ -52,11 +52,11 @@ public class ConsoleConnector implements FullConnector {
 
     @Override
     public void sendMessage(String messageToSend) {
-        System.err.println(messageToSend);
+        System.out.println(messageToSend);
     }
 
     @Override
     public void sendVariation(Variation variation) {
-        System.err.println("Is it " + variation.getValue() + " ?");
+        System.out.println("Is it " + variation.getValue() + " ?");
     }
 }
