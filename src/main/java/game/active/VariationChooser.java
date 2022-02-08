@@ -1,6 +1,7 @@
 package game.active;
 
 import java.util.List;
+import java.util.OptionalInt;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,11 +34,10 @@ public class VariationChooser {
             return variationsToTest.get(0);
         }
         allVariationsTimer.start();
-        List<VariationResult> allVariationResults = VariationResult.getAllPossibleResults();
         Variation result = variationsToTest.get(0);
         int maxMin = 0;
         for (Variation variationToTest : variationsToTest) {
-            int minValue = countMinDiscardedVariations(variationToTest, allVariationResults, variationsToTest);
+            int minValue = countMinDiscardedVariations(variationToTest, variationsToTest);
             if (minValue > maxMin) {
                 maxMin = minValue;
                 result = variationToTest;
@@ -47,19 +47,12 @@ public class VariationChooser {
         return result;
     }
 
-    private static int countMinDiscardedVariations(Variation variationToTest, List<VariationResult> allVariationResults, List<Variation> variationsToTest) {
-        int minVariationCountToDiscard = 10000;
-        for (Variation tempVar : variationsToTest) {
-            long tempMinimum = allVariationResults.stream()
-                .filter(tempVarRes -> VariationsUtils.hasSameResult(variationToTest, tempVarRes, tempVar))
-                .count();
-            if (minVariationCountToDiscard > tempMinimum) {
-                minVariationCountToDiscard = (int) tempMinimum;
-            }
-            if (minVariationCountToDiscard == 0) {
-                break;
-            }
-        }
-        return minVariationCountToDiscard;
+    private static int countMinDiscardedVariations(Variation variationToTest, List<Variation> variationsToTest) {
+        OptionalInt minDiscardedVariations = VariationResult.getAllPossibleResults().parallelStream()
+            .mapToInt(result -> (int) variationsToTest.parallelStream()
+                .filter(v -> !VariationsUtils.hasSameResult(variationToTest, result, v))
+                .count())
+            .min();
+        return minDiscardedVariations.orElse(0);
     }
 }
