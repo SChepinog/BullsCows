@@ -14,20 +14,17 @@ import output.ResultConsumer;
 
 public class RmiConnectorAdapter implements RmiConnector, VariationSupplier, ResultConsumer {
 
+    public static final RmiConnectorAdapter INSTANCE = new RmiConnectorAdapter();
     private static final String UNIQUE_BINDING_NAME = "bulls.cows";
-    public static RmiConnectorAdapter INSTANCE = new RmiConnectorAdapter();
-    private final Registry registry;
-    private RmiConnector rmiConnector = null;
     private Variation variation = null;
     private VariationResult variationResult = null;
 
     private RmiConnectorAdapter() {
         try {
-            this.registry = LocateRegistry.createRegistry(2732);
+            Registry registry = LocateRegistry.createRegistry(2732);
             Remote stub = UnicastRemoteObject.exportObject(this, 0);
             registry.bind(UNIQUE_BINDING_NAME, stub);
-            Thread.sleep(Integer.MAX_VALUE);
-        } catch (RemoteException | AlreadyBoundException | InterruptedException e) {
+        } catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
@@ -35,7 +32,6 @@ public class RmiConnectorAdapter implements RmiConnector, VariationSupplier, Res
 
     @Override
     public Variation getVariation() {
-        System.out.println("Ask for variation");
         while (variation == null) {
             try {
                 Thread.sleep(50);
@@ -43,8 +39,9 @@ public class RmiConnectorAdapter implements RmiConnector, VariationSupplier, Res
                 e.printStackTrace();
             }
         }
-        System.out.println("Got variation " + variation.getValue());
-        return variation;
+        String variationValue = variation.getValue();
+        variation = null;
+        return Variation.of(variationValue);
     }
 
     @Override
@@ -69,7 +66,9 @@ public class RmiConnectorAdapter implements RmiConnector, VariationSupplier, Res
                 e.printStackTrace();
             }
         }
-        System.out.println("Got result " + variationResult);
-        return variationResult;
+        this.variation = null;
+        VariationResult result = VariationResult.of(variationResult.getBulls(), variationResult.getCows());
+        this.variationResult = null;
+        return result;
     }
 }
