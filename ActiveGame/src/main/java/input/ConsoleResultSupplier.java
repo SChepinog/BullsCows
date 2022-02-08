@@ -3,7 +3,8 @@ package input;
 import java.util.Scanner;
 
 import game.active.Animal;
-import game.active.VariationResult;
+import game.common.VariationResult;
+import game.common.VariationsUtils;
 import output.MessageSender;
 
 public class ConsoleResultSupplier implements VariationResultSupplier {
@@ -18,7 +19,7 @@ public class ConsoleResultSupplier implements VariationResultSupplier {
         int bulls = getNumberZeroToFour(Animal.BULLS);
         int cows = variationIsCorrect(bulls) ? 0 : getNumberZeroToFour(Animal.COWS);
         VariationResult inputResult = VariationResult.of(bulls, cows);
-        if (VariationResult.getAllPossibleResults().contains(inputResult)) {
+        if (VariationsUtils.getAllPossibleResults().contains(inputResult)) {
             return inputResult;
         } else {
             messageSender.sendMessage("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");

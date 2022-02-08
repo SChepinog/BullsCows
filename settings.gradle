@@ -1,3 +1,4 @@
 rootProject.name = 'BullsCows'
 include 'ActiveGame'
+include 'PassiveGame'
 

@@ -7,7 +7,7 @@ import game.common.GameSpec;
 
 public class SuggestionValidator {
 
-    static boolean isValid(String suggestion) {
+    public static boolean isValid(String suggestion) {
         if (suggestion == null) {
             return false;
         }

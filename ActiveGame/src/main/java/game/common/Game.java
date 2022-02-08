@@ -1,6 +1,6 @@
-package game.active;
+package game.common;
 
-public interface ActiveGame {
+public interface Game {
     void begin();
 
     boolean isFinished();

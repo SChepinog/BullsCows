@@ -3,10 +3,14 @@ package game.active;
 import java.util.List;
 import java.util.function.Supplier;
 
+import game.common.Game;
+import game.common.Variation;
+import game.common.VariationResult;
+import game.common.VariationsUtils;
 import input.VariationResultSupplier;
 import output.MessageSender;
 
-public class ActiveBullsCowsGame implements ActiveGame {
+public class ActiveBullsCowsGame implements Game {
     private List<Variation> leftVariations;
     private int attempts;
     private boolean isFinished = false;
@@ -63,7 +67,7 @@ public class ActiveBullsCowsGame implements ActiveGame {
 
     @Override
     public void doCongratulations() {
-        messageSender.sendMessage("Hooray! It took " + attempts + " attempts!");
+        messageSender.sendMessage(String.format("Hooray! It took %d attempts!", attempts));
     }
 
     @Override

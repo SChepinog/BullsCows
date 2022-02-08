@@ -1,5 +1,6 @@
-package game.active;
+package game.common;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,6 +9,24 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class VariationsUtils {
+
+    private static final List<VariationResult> ALL_POSSIBLE_RESULTS = Arrays.asList(
+        VariationResult.of(0, 0),
+        VariationResult.of(0, 1),
+        VariationResult.of(0, 2),
+        VariationResult.of(0, 3),
+        VariationResult.of(0, 4),
+        VariationResult.of(1, 0),
+        VariationResult.of(1, 1),
+        VariationResult.of(1, 2),
+        VariationResult.of(1, 3),
+        VariationResult.of(2, 0),
+        VariationResult.of(2, 1),
+        VariationResult.of(2, 2),
+        VariationResult.of(3, 0),
+        VariationResult.of(3, 1),
+        VariationResult.of(4, 0)
+    );
 
     public static List<Variation> generateAllVariations() {
         return IntStream.range(0, 10_000)
@@ -23,12 +42,12 @@ public class VariationsUtils {
             .collect(Collectors.toList());
     }
 
-    static boolean hasSameResult(Variation usedVariation, @NotNull VariationResult result, Variation testVariation) {
+    public static boolean hasSameResult(Variation usedVariation, @NotNull VariationResult result, Variation testVariation) {
         VariationResult testResult = countBullsAndCows(usedVariation, testVariation);
         return result.equals(testResult);
     }
 
-    static @NotNull VariationResult countBullsAndCows(@NotNull Variation usedVariation, @NotNull Variation testVariation) {
+    public static @NotNull VariationResult countBullsAndCows(@NotNull Variation usedVariation, @NotNull Variation testVariation) {
         int bulls = 0;
         int cows = 0;
         for (int i = 0; i < usedVariation.getValue().length(); i++) {
@@ -65,4 +84,7 @@ public class VariationsUtils {
         return cows;
     }
 
+    public static List<VariationResult> getAllPossibleResults() {
+        return ALL_POSSIBLE_RESULTS;
+    }
 }

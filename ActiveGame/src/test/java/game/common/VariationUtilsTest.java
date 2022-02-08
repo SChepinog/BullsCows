@@ -1,4 +1,4 @@
-package game.active;
+package game.common;
 
 import java.util.Arrays;
 import java.util.Collections;

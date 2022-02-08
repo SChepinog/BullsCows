@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
+import game.common.Variation;
+import game.common.VariationsUtils;
 import util.Timer;
 
 public class VariationChooser {
@@ -47,7 +49,7 @@ public class VariationChooser {
     }
 
     private static int countMinDiscardedVariations(Variation variationToTest, List<Variation> variationsToTest) {
-        return VariationResult.getAllPossibleResults().parallelStream()
+        return VariationsUtils.getAllPossibleResults().parallelStream()
             .mapToInt(result -> (int) variationsToTest.parallelStream()
                 .filter(v -> !VariationsUtils.hasSameResult(variationToTest, result, v))
                 .count())
