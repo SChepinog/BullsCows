@@ -27,7 +27,7 @@ public class VariationChooser {
     public static Variation getBestMaxMinChoice(@NotNull List<Variation> variationsToTest) {
         Timer allVariationsTimer = new Timer("bestMaxMinChoice for " + variationsToTest.size() + " variations");
         if (variationsToTest.size() == 10_000) { //default first move for best time first suggestion
-            return Variation.of("1234");
+            return Variation.of("0012");
         }
         if (variationsToTest.size() == 1) {
             return variationsToTest.get(0);
