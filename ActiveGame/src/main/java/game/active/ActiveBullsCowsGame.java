@@ -56,6 +56,7 @@ public class ActiveBullsCowsGame implements Game {
     }
 
     private void suggestVariation(Variation testVariation) {
+        messageSender.sendVariation(testVariation);
         messageSender.sendMessage(attempts + " attempt. ");
         messageSender.sendMessage("Hmm, Is it '" + testVariation.getValue() + "'?");
     }

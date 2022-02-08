@@ -3,7 +3,7 @@ package game.active;
 import game.common.Game;
 import rmi.RmiConnectorAdapter;
 
-public class Main {
+public class ActiveMain {
 
     public static void main(String[] args) {
 //        MessageSender messageSender = new ConsoleMessageSender();
