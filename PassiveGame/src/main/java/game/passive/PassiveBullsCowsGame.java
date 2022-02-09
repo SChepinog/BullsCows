@@ -14,7 +14,7 @@ import game.common.VariationsUtils;
 public class PassiveBullsCowsGame implements Game {
     private int attempts = 0;
     private boolean isFinished = false;
-    private final Variation secret = SecretGenerator.create();
+    private final Variation secret;
     private final VariationSupplier variationSupplier;
     private final ResultConsumer resultConsumer;
 
@@ -22,9 +22,18 @@ public class PassiveBullsCowsGame implements Game {
         this(connector, connector);
     }
 
+    public PassiveBullsCowsGame(FullConnector connector, Variation secret) {
+        this(connector, connector, secret);
+    }
+
     public PassiveBullsCowsGame(VariationSupplier variationSupplier, ResultConsumer resultConsumer) {
+        this(variationSupplier, resultConsumer, SecretGenerator.create());
+    }
+
+    public PassiveBullsCowsGame(VariationSupplier variationSupplier, ResultConsumer resultConsumer, Variation secret) {
         this.variationSupplier = variationSupplier;
         this.resultConsumer = resultConsumer;
+        this.secret = secret;
     }
 
     @Override
