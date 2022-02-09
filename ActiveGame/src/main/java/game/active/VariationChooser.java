@@ -60,8 +60,8 @@ public class VariationChooser {
                 return Variation.of("012");
             case 4:
                 return Variation.of("0012");
-            case 5:
-                return Variation.of("00012");
+//            case 5:
+//                return Variation.of("00012");
             default:
                 return null;
         }
