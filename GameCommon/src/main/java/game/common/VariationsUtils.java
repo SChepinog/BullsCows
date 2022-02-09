@@ -1,6 +1,5 @@
 package game.common;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -10,28 +9,20 @@ import org.jetbrains.annotations.NotNull;
 
 public class VariationsUtils {
 
-    private static final List<VariationResult> ALL_POSSIBLE_RESULTS = Arrays.asList(
-        VariationResult.of(0, 0),
-        VariationResult.of(0, 1),
-        VariationResult.of(0, 2),
-        VariationResult.of(0, 3),
-        VariationResult.of(0, 4),
-        VariationResult.of(1, 0),
-        VariationResult.of(1, 1),
-        VariationResult.of(1, 2),
-        VariationResult.of(1, 3),
-        VariationResult.of(2, 0),
-        VariationResult.of(2, 1),
-        VariationResult.of(2, 2),
-        VariationResult.of(3, 0),
-        VariationResult.of(3, 1),
-        VariationResult.of(4, 0)
-    );
+    private static final List<VariationResult> ALL_POSSIBLE_RESULTS = generateAllPossibleResults();
+
+    private static List<VariationResult> generateAllPossibleResults() {
+        return IntStream.range(0, GameSpec.LENGTH + 1).boxed().flatMap(
+            bulls ->
+                IntStream.range(0, GameSpec.LENGTH + 1 - bulls)
+                    .mapToObj(cows -> VariationResult.of(bulls, cows))
+        ).collect(Collectors.toList());
+    }
 
     public static List<Variation> generateAllVariations() {
-        return IntStream.range(0, 10_000)
+        return IntStream.range(0, (int) Math.pow(10, GameSpec.LENGTH))
             .mapToObj(String::valueOf)
-            .map(s -> StringUtils.leftPad(s, 4, "0"))
+            .map(s -> StringUtils.leftPad(s, GameSpec.LENGTH, "0"))
             .map(Variation::of)
             .collect(Collectors.toList());
     }

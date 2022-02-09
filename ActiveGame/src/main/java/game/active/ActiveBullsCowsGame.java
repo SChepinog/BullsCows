@@ -7,6 +7,7 @@ import connector.FullConnector;
 import connector.MessageSender;
 import connector.VariationResultSupplier;
 import game.common.Game;
+import game.common.GameSpec;
 import game.common.Variation;
 import game.common.VariationResult;
 import game.common.VariationsUtils;
@@ -17,7 +18,7 @@ public class ActiveBullsCowsGame implements Game {
     private boolean isFinished = false;
     private final VariationResultSupplier resultSupplier;
     private final MessageSender messageSender;
-    private Supplier<Variation> variationSupplier = () -> VariationChooser.getBestMaxMinChoice(leftVariations);
+    private final Supplier<Variation> variationSupplier = () -> VariationChooser.getBestMaxMinChoice(leftVariations);
 
     public ActiveBullsCowsGame(FullConnector connector) {
         this(connector, connector);
@@ -28,10 +29,6 @@ public class ActiveBullsCowsGame implements Game {
         this.messageSender = messageSender;
         this.leftVariations = VariationsUtils.generateAllVariations();
         this.attempts = 0;
-    }
-
-    public void setVariationSupplier(Supplier<Variation> variationSupplier) {
-        this.variationSupplier = variationSupplier;
     }
 
     @Override
@@ -53,7 +50,7 @@ public class ActiveBullsCowsGame implements Game {
     }
 
     private boolean variationWasCorrect(VariationResult variationResult) {
-        return variationResult.getBulls() == 4;
+        return variationResult.getBulls() == GameSpec.LENGTH;
     }
 
     private void updateVariations(Variation usedVariation, VariationResult variationResult) {
