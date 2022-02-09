@@ -3,7 +3,6 @@ package connector.rmi;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 
 import connector.FullConnector;
 import game.common.Variation;
@@ -11,14 +10,13 @@ import game.common.VariationResult;
 
 public class RmiConnectorAdapter implements FullConnector {
     private static final String UNIQUE_BINDING_NAME = "bulls.cows";
-    public static RmiConnectorAdapter INSTANCE = new RmiConnectorAdapter();
+    public static final RmiConnectorAdapter INSTANCE = new RmiConnectorAdapter();
     private final RmiConnector connector;
     private Variation variation = null;
 
     private RmiConnectorAdapter() {
         try {
-            Registry registry = LocateRegistry.getRegistry(2732);
-            connector = (RmiConnector) registry.lookup(UNIQUE_BINDING_NAME);
+            connector = (RmiConnector) LocateRegistry.getRegistry(2732).lookup(UNIQUE_BINDING_NAME);
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -35,6 +33,7 @@ public class RmiConnectorAdapter implements FullConnector {
             throw new RuntimeException(e);
         }
         System.out.println("getResult " + result);
+        variation = null;
         return result;
     }
 
@@ -45,7 +44,7 @@ public class RmiConnectorAdapter implements FullConnector {
 
     @Override
     public void sendVariation(Variation variation) {
-        System.out.println("Send variation " + variation.getValue());
+        System.out.println("sendVariation " + variation.getValue());
         this.variation = variation;
     }
 }
