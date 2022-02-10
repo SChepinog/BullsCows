@@ -17,7 +17,7 @@ public class ConsoleConnector implements FullConnector {
         if (VariationsUtils.getAllPossibleResults().contains(inputResult)) {
             return inputResult;
         } else {
-            System.out.println("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");
+            sendMessage("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");
             return getResult();
         }
     }
@@ -27,10 +27,10 @@ public class ConsoleConnector implements FullConnector {
     }
 
     private int getNumberZeroToFour(Animal bullsOrCows) {
-        System.out.println("Enter number of " + bullsOrCows.getReadableName());
+        sendMessage("Enter number of " + bullsOrCows.getReadableName());
         int count = getIntFromConsole();
         if (count < 0 || count > 4) {
-            System.out.println("You entered wrong number, it should be from 0 to 4 inclusive");
+            sendMessage("You entered wrong number, it should be from 0 to 4 inclusive");
             return getNumberZeroToFour(bullsOrCows);
         } else {
             return count;
@@ -45,7 +45,7 @@ public class ConsoleConnector implements FullConnector {
             result = Integer.parseInt(suggestion);
             return result;
         } catch (Exception exception) {
-            System.out.println("You entered wrong value. It should be a number");
+            sendMessage("You entered wrong value. It should be a number");
             return getIntFromConsole();
         }
     }
@@ -57,6 +57,6 @@ public class ConsoleConnector implements FullConnector {
 
     @Override
     public void sendVariation(Variation variation) {
-        System.out.println("Is it " + variation.getValue() + " ?");
+        sendMessage("Is it " + variation.getValue() + " ?");
     }
 }

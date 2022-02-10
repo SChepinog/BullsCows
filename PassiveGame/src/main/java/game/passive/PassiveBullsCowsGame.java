@@ -53,7 +53,7 @@ public class PassiveBullsCowsGame implements Game {
         attempts++;
         VariationResult result = testVariation(variation);
         resultConsumer.sendResult(result);
-        if (result.getBulls() == GameSpec.LENGTH) {
+        if (result.getBulls() == GameSpec.getLength()) {
             this.isFinished = true;
         }
     }

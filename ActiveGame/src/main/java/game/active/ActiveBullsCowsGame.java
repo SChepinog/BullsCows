@@ -50,7 +50,7 @@ public class ActiveBullsCowsGame implements Game {
     }
 
     private boolean variationWasCorrect(VariationResult variationResult) {
-        return variationResult.getBulls() == GameSpec.LENGTH;
+        return variationResult.getBulls() == GameSpec.getLength();
     }
 
     private void updateVariations(Variation usedVariation, VariationResult variationResult) {

@@ -8,6 +8,6 @@ import game.common.Variation;
 public class SecretGenerator {
 
     public static Variation create() {
-        return Variation.of(RandomStringUtils.randomNumeric(GameSpec.LENGTH));
+        return Variation.of(RandomStringUtils.randomNumeric(GameSpec.getLength()));
     }
 }

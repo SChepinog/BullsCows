@@ -34,26 +34,27 @@ public class VariationChooser {
                 return defaultVariation;
             }
         }
-        Timer allVariationsTimer = new Timer("bestMaxMinChoice for " + variationsToTest.size() + " variations");
         if (variationsToTest.size() == 1) {
             return variationsToTest.iterator().next();
         }
-        allVariationsTimer.start();
+        Timer allVariationsTimer = new Timer("bestMaxMinChoice for " + variationsToTest.size() + " variations").start();
         Variation result = variationsToTest.iterator().next();
         int maxMin = 0;
         for (Variation variationToTest : variationsToTest) {
+            Timer oneVariationTimer = new Timer("one variation timer").start();
             int minValue = countMinDiscardedVariations(variationToTest, variationsToTest);
             if (minValue > maxMin) {
                 maxMin = minValue;
                 result = variationToTest;
             }
+            System.out.println(oneVariationTimer.stopAndGetElapsedTimeAsString());
         }
         System.out.println(allVariationsTimer.stopAndGetElapsedTimeAsString());
         return result;
     }
 
     private static Variation getDefaultFirstMove() {
-        switch (GameSpec.LENGTH) {
+        switch (GameSpec.getLength()) {
             case 2:
                 return Variation.of("01");
             case 3:
@@ -68,11 +69,11 @@ public class VariationChooser {
     }
 
     private static boolean isFirstMove(List<Variation> variationsToTest) {
-        return variationsToTest.size() == (int) Math.pow(10, GameSpec.LENGTH);
+        return variationsToTest.size() == GameSpec.getVariationsTotal();
     }
 
     private static int countMinDiscardedVariations(Variation variationToTest, List<Variation> variationsToTest) {
-        return VariationsUtils.getAllPossibleResults().parallelStream()
+        return VariationsUtils.getResultsToMinCheck().parallelStream()
             .mapToInt(result -> (int) variationsToTest.parallelStream()
                 .filter(v -> !VariationsUtils.hasSameResult(variationToTest, result, v))
                 .count())

@@ -11,7 +11,7 @@ public class SuggestionValidator {
         if (suggestion == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile("^\\d{" + GameSpec.LENGTH + "}$");
+        Pattern pattern = Pattern.compile("^\\d{" + GameSpec.getLength() + "}$");
         Matcher matcher = pattern.matcher(suggestion);
         return matcher.find();
     }

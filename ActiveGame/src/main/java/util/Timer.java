@@ -11,8 +11,9 @@ public class Timer {
         this.name = name;
     }
 
-    public void start() {
+    public Timer start() {
         startNanos = System.nanoTime();
+        return this;
     }
 
     public String stopAndGetElapsedTimeAsString() {

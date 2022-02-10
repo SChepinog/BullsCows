@@ -9,20 +9,22 @@ import org.jetbrains.annotations.NotNull;
 
 public class VariationsUtils {
 
-    private static final List<VariationResult> ALL_POSSIBLE_RESULTS = generateAllPossibleResults();
+    private static final List<VariationResult> ALL_POSSIBLE_RESULTS = generateAllPossibleResults(true);
+    private static final List<VariationResult> ALL_RESULTS_FOR_MIN_CHECK = generateAllPossibleResults(false);
 
-    private static List<VariationResult> generateAllPossibleResults() {
-        return IntStream.range(0, GameSpec.LENGTH + 1).boxed().flatMap(
-            bulls ->
-                IntStream.range(0, GameSpec.LENGTH + 1 - bulls)
-                    .mapToObj(cows -> VariationResult.of(bulls, cows))
-        ).collect(Collectors.toList());
+    private static List<VariationResult> generateAllPossibleResults(boolean includeWinResult) {
+        return IntStream.range(0, GameSpec.getLength() + (includeWinResult ? 1 : 0))
+            .boxed().flatMap(
+                bulls ->
+                    IntStream.range(0, GameSpec.getLength() + 1 - bulls)
+                        .mapToObj(cows -> VariationResult.of(bulls, cows))
+            ).collect(Collectors.toList());
     }
 
     public static List<Variation> generateAllVariations() {
-        return IntStream.range(0, (int) Math.pow(10, GameSpec.LENGTH))
+        return IntStream.range(0, GameSpec.getVariationsTotal())
             .mapToObj(String::valueOf)
-            .map(s -> StringUtils.leftPad(s, GameSpec.LENGTH, "0"))
+            .map(s -> StringUtils.leftPad(s, GameSpec.getLength(), "0"))
             .map(Variation::of)
             .collect(Collectors.toList());
     }
@@ -77,5 +79,9 @@ public class VariationsUtils {
 
     public static List<VariationResult> getAllPossibleResults() {
         return ALL_POSSIBLE_RESULTS;
+    }
+
+    public static List<VariationResult> getResultsToMinCheck() {
+        return ALL_RESULTS_FOR_MIN_CHECK;
     }
 }
