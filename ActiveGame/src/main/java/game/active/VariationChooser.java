@@ -41,13 +41,11 @@ public class VariationChooser {
         Variation result = variationsToTest.iterator().next();
         int maxMin = 0;
         for (Variation variationToTest : variationsToTest) {
-            Timer oneVariationTimer = new Timer("one variation timer").start();
             int minValue = countMinDiscardedVariations(variationToTest, variationsToTest);
             if (minValue > maxMin) {
                 maxMin = minValue;
                 result = variationToTest;
             }
-            System.out.println(oneVariationTimer.stopAndGetElapsedTimeAsString());
         }
         System.out.println(allVariationsTimer.stopAndGetElapsedTimeAsString());
         return result;
