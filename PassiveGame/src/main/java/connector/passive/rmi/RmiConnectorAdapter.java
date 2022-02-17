@@ -1,4 +1,4 @@
-package connector.rmi;
+package connector.passive.rmi;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
@@ -7,7 +7,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import connector.FullConnector;
+import connector.RmiConnector;
+import connector.passive.FullConnector;
 import game.common.Variation;
 import game.common.VariationResult;
 

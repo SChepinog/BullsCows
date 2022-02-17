@@ -1,10 +1,11 @@
-package connector.rmi;
+package connector.active.rmi;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-import connector.FullConnector;
+import connector.RmiConnector;
+import connector.active.FullConnector;
 import game.common.Variation;
 import game.common.VariationResult;
 

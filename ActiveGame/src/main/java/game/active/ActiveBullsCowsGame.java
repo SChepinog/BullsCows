@@ -3,9 +3,9 @@ package game.active;
 import java.util.List;
 import java.util.function.Supplier;
 
-import connector.FullConnector;
-import connector.MessageSender;
-import connector.VariationResultSupplier;
+import connector.active.FullConnector;
+import connector.active.MessageSender;
+import connector.active.VariationResultSupplier;
 import game.common.Game;
 import game.common.GameSpec;
 import game.common.Variation;

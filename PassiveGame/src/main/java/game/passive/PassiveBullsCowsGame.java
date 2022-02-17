@@ -2,9 +2,9 @@ package game.passive;
 
 import org.jetbrains.annotations.NotNull;
 
-import connector.FullConnector;
-import connector.ResultConsumer;
-import connector.VariationSupplier;
+import connector.passive.FullConnector;
+import connector.passive.ResultConsumer;
+import connector.passive.VariationSupplier;
 import game.common.Game;
 import game.common.GameSpec;
 import game.common.Variation;
