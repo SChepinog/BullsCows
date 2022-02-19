@@ -21,8 +21,13 @@ public class Main {
         passiveThread.start();
         activeThread.start();
 
+        while (passiveThread.isAlive() || activeThread.isAlive()) {
+            Thread.yield();
+        }
+
         activeThread.interrupt();
         passiveThread.interrupt();
         rmiThread.interrupt();
+        System.exit(30);
     }
 }
