@@ -16,11 +16,11 @@ public class PassiveBullsCowsGameRMI extends PassiveBullsCowsGame {
     @Override
     public void doCongratulations() {
         super.doCongratulations();
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.exit(30);
+//        try {
+//            Thread.sleep(200);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        System.exit(30);
     }
 }

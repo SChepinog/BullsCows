@@ -1,13 +1,28 @@
+import game.common.Variation;
+
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         Thread rmiThread = new Thread(new RmiServerLauncher());
-        Thread passiveThread = new Thread(new PassiveGameLauncher());
-        Thread activeThread = new Thread(new ActiveGameLauncher());
-
         rmiThread.start();
-        passiveThread.start();
         Thread.sleep(1000);
+
+        Thread passiveThread = new Thread(new PassiveGameLauncher(Variation.of("0987")));
+        Thread activeThread = new Thread(new ActiveGameLauncher());
+        passiveThread.start();
         activeThread.start();
+
+        while (passiveThread.isAlive() || activeThread.isAlive()) {
+            Thread.yield();
+        }
+
+        passiveThread = new Thread(new PassiveGameLauncher(Variation.of("0986")));
+        activeThread = new Thread(new ActiveGameLauncher());
+        passiveThread.start();
+        activeThread.start();
+
+        activeThread.interrupt();
+        passiveThread.interrupt();
+        rmiThread.interrupt();
     }
 }
