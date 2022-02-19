@@ -10,9 +10,9 @@ public class RmiConnectorImpl implements FullConnector {
     private VariationResult variationResult = null;
 
     public RmiConnectorImpl() {
-        RmiServer rmiServer = RmiServer.INSTANCE;
-        rmiServer.setVariationConsumer(v -> this.variation = v);
-        rmiServer.setVariationResultSupplier(this::getResult);
+        RmiServer.INSTANCE
+            .setVariationConsumer(v -> this.variation = v)
+            .setVariationResultSupplier(this::getResult);
     }
 
     @Override

@@ -1,14 +1,13 @@
-import game.active.ActiveBullsCowsGameRMI;
-import game.common.Game;
-import game.common.Variation;
-import game.passive.PassiveBullsCowsGameRMI;
-
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        Game passiveGame = new PassiveBullsCowsGameRMI(Variation.of("0000"));
-        Game activeGame = new ActiveBullsCowsGameRMI();
-        passiveGame.doFullGame();
-        activeGame.doFullGame();
+        Thread rmiThread = new Thread(new RmiServerLauncher());
+        Thread passiveThread = new Thread(new PassiveGameLauncher());
+        Thread activeThread = new Thread(new ActiveGameLauncher());
+
+        rmiThread.start();
+        passiveThread.start();
+        Thread.sleep(1000);
+        activeThread.start();
     }
 }

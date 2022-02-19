@@ -13,12 +13,24 @@ import connector.RmiConnector;
 import game.common.Variation;
 import game.common.VariationResult;
 
-public class RmiServer implements RmiConnector {
+public enum RmiServer implements RmiConnector {
 
-    public static final RmiServer INSTANCE = new RmiServer();
+    INSTANCE;
+
     private static final String UNIQUE_BINDING_NAME = "bulls.cows";
     private Consumer<Variation> variationConsumer;
     private Supplier<VariationResult> variationResultSupplier;
+
+    RmiServer() {
+        try {
+            Registry registry = LocateRegistry.createRegistry(2732);
+            Remote stub = UnicastRemoteObject.exportObject(this, 0);
+            registry.bind(UNIQUE_BINDING_NAME, stub);
+        } catch (RemoteException | AlreadyBoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
     public RmiServer setVariationConsumer(Consumer<Variation> variationConsumer) {
         this.variationConsumer = variationConsumer;
@@ -30,20 +42,12 @@ public class RmiServer implements RmiConnector {
         return this;
     }
 
-    private RmiServer() {
-        try {
-            Registry registry = LocateRegistry.createRegistry(2732);
-            Remote stub = UnicastRemoteObject.exportObject(this, 0);
-            registry.bind(UNIQUE_BINDING_NAME, stub);
-        } catch (RemoteException | AlreadyBoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     public VariationResult testVariation(Variation variation) throws RemoteException {
         System.out.println("Got variation " + variation.getValue());
+        while (variationConsumer == null) {
+            Thread.yield();
+        }
         variationConsumer.accept(variation);
         return variationResultSupplier.get();
     }
