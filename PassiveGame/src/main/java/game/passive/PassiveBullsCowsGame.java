@@ -12,9 +12,9 @@ import game.common.VariationResult;
 import game.common.VariationsUtils;
 
 public class PassiveBullsCowsGame implements Game {
-    private int attempts = 0;
+    int attempts = 0;
     private boolean isFinished = false;
-    private final Variation secret;
+    final Variation secret;
     private final VariationSupplier variationSupplier;
     private final ResultConsumer resultConsumer;
 
