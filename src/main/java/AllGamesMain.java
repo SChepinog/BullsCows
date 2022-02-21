@@ -22,6 +22,7 @@ public class AllGamesMain {
                 Thread.yield();
             }
             System.out.println(oneGameTimer.stopAndGetElapsedTimeAsString());
+            Thread.sleep(100);
         }
         System.out.println(allGames.stopAndGetElapsedTimeAsString());
 
