@@ -47,7 +47,7 @@ public class VariationChooser {
                 result = variationToTest;
             }
         }
-        System.out.println(allVariationsTimer.stopAndGetElapsedTimeAsString());
+        System.out.println("Active - " + allVariationsTimer.stopAndGetElapsedTimeAsString());
         return result;
     }
 

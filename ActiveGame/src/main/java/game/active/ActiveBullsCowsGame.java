@@ -64,8 +64,8 @@ public class ActiveBullsCowsGame implements Game {
     }
 
     private void logIterationInput() {
-        System.out.println("------------------------------------");
-        System.out.println("Left variations: " + leftVariations.size());
+        System.out.println("Active - ------------------------------------");
+        System.out.println("Active - Left variations: " + leftVariations.size());
     }
 
     @Override

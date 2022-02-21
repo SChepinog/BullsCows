@@ -33,19 +33,19 @@ public class RmiConnectorAdapter implements FullConnector {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-        System.out.println("getResult " + result);
+        System.out.println("Active - getResult " + result);
         variation = null;
         return result;
     }
 
     @Override
     public void sendMessage(String messageToSend) {
-//        System.out.println("Message to send " + messageToSend);
+        System.out.println("Active - Message to send " + messageToSend);
     }
 
     @Override
     public void sendVariation(Variation variation) {
-        System.out.println("sendVariation " + variation.getValue());
+        System.out.println("Active - sendVariation " + variation.getValue());
         this.variation = variation;
     }
 }
