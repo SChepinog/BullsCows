@@ -45,10 +45,12 @@ public enum RmiServer implements RmiConnector {
     @Override
     public VariationResult testVariation(Variation variation) throws RemoteException {
         System.out.println("Server: Got variation " + variation.getValue());
-        while (variationConsumer == null) {
+        while (variationConsumer == null || variationResultSupplier == null) {
             Thread.yield();
         }
         variationConsumer.accept(variation);
-        return variationResultSupplier.get();
+        VariationResult result = variationResultSupplier.get();
+        System.out.println("Server: Send result " + result);
+        return result;
     }
 }
