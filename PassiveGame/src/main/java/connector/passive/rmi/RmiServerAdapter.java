@@ -10,8 +10,15 @@ public class RmiServerAdapter {
 
     public RmiServerAdapter() {
         RmiServer.INSTANCE
-            .setVariationConsumer(v -> this.variation = v)
+            .setVariationConsumer(this::setVariation)
             .setVariationResultSupplier(this::getResult);
+    }
+
+    private void setVariation(Variation newVariation) {
+        while (this.variation != null) {
+            Thread.yield();
+        }
+        this.variation = newVariation;
     }
 
     public Variation getVariation() {

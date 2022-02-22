@@ -22,7 +22,11 @@ public class VariationsUtils {
     }
 
     public static List<Variation> generateAllVariations() {
-        return IntStream.range(0, GameSpec.getVariationsTotal())
+        return generateAllVariations(0);
+    }
+
+    public static List<Variation> generateAllVariations(int startInclusive) {
+        return IntStream.range(startInclusive, GameSpec.getVariationsTotal())
             .mapToObj(String::valueOf)
             .map(s -> StringUtils.leftPad(s, GameSpec.getLength(), "0"))
             .map(Variation::of)
