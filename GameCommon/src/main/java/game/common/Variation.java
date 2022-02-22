@@ -1,6 +1,7 @@
 package game.common;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Variation implements Serializable {
 
@@ -16,5 +17,24 @@ public class Variation implements Serializable {
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Variation variation = (Variation) o;
+
+        return Objects.equals(value, variation.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return value != null ? value.hashCode() : 0;
     }
 }
