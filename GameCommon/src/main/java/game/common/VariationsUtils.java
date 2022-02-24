@@ -101,28 +101,6 @@ public class VariationsUtils {
         return VariationResult.of(bulls, cows);
     }
 
-    static int countBulls(@NotNull Variation usedVariation, @NotNull Variation testVariation) {
-        int bulls = 0;
-        for (int i = 0; i < usedVariation.getValue().length(); i++) {
-            if (usedVariation.getValue().charAt(i) == testVariation.getValue().charAt(i)) {
-                bulls++;
-            }
-        }
-        return bulls;
-    }
-
-    static int countCows(@NotNull Variation usedVariation, @NotNull Variation testVariation) {
-        int cows = 0;
-        for (int i = 0; i < usedVariation.getValue().length(); i++) {
-            if (testVariation.getValue().contains(usedVariation.getValue().substring(i, i + 1))
-                && testVariation.getValue().charAt(i) != usedVariation.getValue().charAt(i)
-            ) {
-                cows++;
-            }
-        }
-        return cows;
-    }
-
     public static List<VariationResult> getAllPossibleResults() {
         return ALL_POSSIBLE_RESULTS;
     }
