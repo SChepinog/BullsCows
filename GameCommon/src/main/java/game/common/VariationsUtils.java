@@ -1,9 +1,7 @@
 package game.common;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -38,39 +36,23 @@ public class VariationsUtils {
 
     public static List<Variation> generateAllVariationsDiff() {
         List<Variation> result = new ArrayList<>(5040);
-        Set<String> stringVariation = new LinkedHashSet<>(4);
-        for (int first = 0; first < 10; first++) {
-            String firstString = String.valueOf(first);
-            stringVariation.add(firstString);
-            for (int second = 0; second < 10; second++) {
-                String secondString = String.valueOf(second);
-                if (stringVariation.contains(secondString)) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == i) {
                     continue;
-                } else {
-                    stringVariation.add(secondString);
                 }
-                for (int third = 0; third < 10; third++) {
-                    String thirdString = String.valueOf(third);
-                    if (stringVariation.contains(thirdString)) {
+                for (int k = 0; k < 10; k++) {
+                    if (k == i || k == j) {
                         continue;
-                    } else {
-                        stringVariation.add(thirdString);
                     }
-                    for (int fourth = 0; fourth < 10; fourth++) {
-                        String fourthString = String.valueOf(fourth);
-                        if (stringVariation.contains(fourthString)) {
+                    for (int l = 0; l < 10; l++) {
+                        if (l == i || l == j || l == k) {
                             continue;
-                        } else {
-                            stringVariation.add(fourthString);
                         }
-                        result.add(Variation.of(String.join("", stringVariation)));
-                        stringVariation.remove(fourthString);
+                        result.add(Variation.of(StringUtils.join(i, j, k, l, "")));
                     }
-                    stringVariation.remove(thirdString);
                 }
-                stringVariation.remove(secondString);
             }
-            stringVariation.remove(firstString);
         }
         return result;
     }
