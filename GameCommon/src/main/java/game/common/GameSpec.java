@@ -7,7 +7,7 @@ public class GameSpec {
         return LENGTH;
     }
 
-    public static int getVariationsTotal() {
+    public static int getVariationsTotal() { //TODO for different rules
         return (int) Math.pow(10, LENGTH);
     }
 }

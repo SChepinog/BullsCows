@@ -1,5 +1,5 @@
 import game.common.Variation;
-import game.common.VariationsUtils;
+import game.common.generator.AllPossibleGenerator;
 import util.Timer;
 
 public class AllGamesMain {
@@ -11,7 +11,7 @@ public class AllGamesMain {
         Thread passiveThread = null;
         Thread activeThread = null;
         Timer allGames = new Timer("All games").start();
-        for (Variation var : VariationsUtils.generateAllVariations()) {
+        for (Variation var : new AllPossibleGenerator().generateAllVariations()) {
             Timer oneGameTimer = new Timer("One game").start();
             passiveThread = new Thread(new PassiveGameLauncher(var));
             activeThread = new Thread(new ActiveGameLauncher());

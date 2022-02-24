@@ -1,47 +1,37 @@
-package game.active;
+package game.active.chooser;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-
 import game.common.GameSpec;
 import game.common.Variation;
+import game.common.VariationResultUtils;
 import game.common.VariationsUtils;
 import util.Timer;
 
-public class VariationChooser {
-
-    /**
-     * "Stupid" variation chooser, just get first element of left variations
-     *
-     * @param variationsToTest list of left variations
-     * @return first element
-     */
-    public static Variation getFirstElement(@NotNull List<Variation> variationsToTest) {
-        return variationsToTest.iterator().next();
-    }
+public class MaxMinChooser implements VariationChooser {
 
     /**
      * Variation chooser, based on max-min algorithm. Memory demanding
      *
-     * @param variationsToTest list of left variations
+     * @param variations list of left variations
      * @return best choice
      */
-    public static Variation getBestMaxMinChoice(@NotNull List<Variation> variationsToTest) {
-        if (isFirstMove(variationsToTest)) {
+    @Override
+    public Variation chooseVariation(List<Variation> variations) {
+        if (isFirstMove(variations)) {
             Variation defaultVariation = getDefaultFirstMove();
             if (defaultVariation != null) {
                 return defaultVariation;
             }
         }
-        if (variationsToTest.size() == 1) {
-            return variationsToTest.iterator().next();
+        if (variations.size() == 1) {
+            return variations.iterator().next();
         }
-        Timer allVariationsTimer = new Timer("bestMaxMinChoice for " + variationsToTest.size() + " variations").start();
-        Variation result = variationsToTest.iterator().next();
+        Timer allVariationsTimer = new Timer("bestMaxMinChoice for " + variations.size() + " variations").start();
+        Variation result = variations.iterator().next();
         int maxMin = 0;
-        for (Variation variationToTest : variationsToTest) {
-            int minValue = countMinDiscardedVariations(variationToTest, variationsToTest);
+        for (Variation variationToTest : variations) {
+            int minValue = countMinDiscardedVariations(variationToTest, variations);
             if (minValue > maxMin) {
                 maxMin = minValue;
                 result = variationToTest;
@@ -71,7 +61,7 @@ public class VariationChooser {
     }
 
     private static int countMinDiscardedVariations(Variation variationToTest, List<Variation> variationsToTest) {
-        return VariationsUtils.getResultsToMinCheck().parallelStream()
+        return VariationResultUtils.getResultsToMinCheck().parallelStream()
             .mapToInt(result -> (int) variationsToTest.parallelStream()
                 .filter(v -> !VariationsUtils.hasSameResult(variationToTest, result, v))
                 .count())

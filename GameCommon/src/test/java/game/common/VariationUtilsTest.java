@@ -67,12 +67,4 @@ public class VariationUtilsTest {
         Assertions.assertEquals(1, result.size());
         Assertions.assertEquals(okVariation, result.get(0));
     }
-
-    @Test
-    public void generateDifferentVariations() {
-        List<Variation> variations = VariationsUtils.generateAllVariationsDiff();
-        Assertions.assertEquals(5040, variations.size());
-        Assertions.assertEquals(Variation.of("0123"), variations.get(0));
-        Assertions.assertEquals(Variation.of("9876"), variations.get(5039));
-    }
 }

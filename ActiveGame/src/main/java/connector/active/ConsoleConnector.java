@@ -5,7 +5,7 @@ import java.util.Scanner;
 import game.active.Animal;
 import game.common.Variation;
 import game.common.VariationResult;
-import game.common.VariationsUtils;
+import game.common.VariationResultUtils;
 
 public class ConsoleConnector implements FullConnector {
 
@@ -14,7 +14,7 @@ public class ConsoleConnector implements FullConnector {
         int bulls = getNumberZeroToFour(Animal.BULLS);
         int cows = variationIsCorrect(bulls) ? 0 : getNumberZeroToFour(Animal.COWS);
         VariationResult inputResult = VariationResult.of(bulls, cows);
-        if (VariationsUtils.getAllPossibleResults().contains(inputResult)) {
+        if (VariationResultUtils.getAllPossibleResults().contains(inputResult)) {
             return inputResult;
         } else {
             sendMessage("You entered not possible combination of bulls and cows.\nPlease, check it and enter again");

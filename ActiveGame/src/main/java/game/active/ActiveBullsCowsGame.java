@@ -1,24 +1,28 @@
 package game.active;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import connector.active.FullConnector;
 import connector.active.MessageSender;
 import connector.active.VariationResultSupplier;
+import game.active.chooser.MaxMinChooser;
+import game.active.chooser.VariationChooser;
 import game.common.Game;
 import game.common.GameSpec;
 import game.common.Variation;
 import game.common.VariationResult;
 import game.common.VariationsUtils;
+import game.common.generator.AllPossibleGenerator;
+import game.common.generator.VariationsGenerator;
 
 public class ActiveBullsCowsGame implements Game {
+    private VariationsGenerator variationsGenerator = new AllPossibleGenerator();
     private List<Variation> leftVariations;
     private int attempts;
     private boolean isFinished = false;
     private final VariationResultSupplier resultSupplier;
     private final MessageSender messageSender;
-    private final Supplier<Variation> variationSupplier = () -> VariationChooser.getBestMaxMinChoice(leftVariations);
+    private final VariationChooser variationChooser = new MaxMinChooser();
 
     public ActiveBullsCowsGame(FullConnector connector) {
         this(connector, connector);
@@ -27,13 +31,13 @@ public class ActiveBullsCowsGame implements Game {
     public ActiveBullsCowsGame(VariationResultSupplier resultSupplier, MessageSender messageSender) {
         this.resultSupplier = resultSupplier;
         this.messageSender = messageSender;
-        this.leftVariations = VariationsUtils.generateAllVariations();
+        this.leftVariations = variationsGenerator.generateAllVariations();
         this.attempts = 0;
     }
 
     @Override
     public void doIteration() {
-        Variation usedVariation = variationSupplier.get();
+        Variation usedVariation = variationChooser.chooseVariation(leftVariations);
         logIterationInput();
         increaseAttempts();
         suggestVariation(usedVariation);
