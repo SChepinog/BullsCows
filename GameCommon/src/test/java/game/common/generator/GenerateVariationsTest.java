@@ -11,20 +11,29 @@ import game.common.Variation;
 
 public class GenerateVariationsTest {
 
-    private VariationsGenerator generator;
+    @Test
+    public void generateDifferentVariations4() {
+        NoSimilarDigitsGenerator generator4 = new NoSimilarDigitsGenerator();
+        List<Variation> variations = generator4.generateAllVariations(4);
+        int amount = 10 * 9 * 8 * 7;
+        Assertions.assertEquals(amount, variations.size());
+        Assertions.assertEquals(Variation.of("0123"), variations.get(0));
+        Assertions.assertEquals(Variation.of("9876"), variations.get(amount - 1));
+    }
 
     @Test
-    public void generateDifferentVariations() {
-        generator = new NoSimilarDigitsGenerator(); //TODO for different game length
-        List<Variation> variations = generator.generateAllVariations();
-        Assertions.assertEquals(5040, variations.size());
-        Assertions.assertEquals(Variation.of("0123"), variations.get(0));
-        Assertions.assertEquals(Variation.of("9876"), variations.get(5039));
+    public void generateDifferentVariations3() {
+        NoSimilarDigitsGenerator generator3 = new NoSimilarDigitsGenerator();
+        List<Variation> variations = generator3.generateAllVariations(3);
+        int amount = 10 * 9 * 8;
+        Assertions.assertEquals(amount, variations.size());
+        Assertions.assertEquals(Variation.of("012"), variations.get(0));
+        Assertions.assertEquals(Variation.of("987"), variations.get(amount - 1));
     }
 
     @Test
     public void generateAllPossibleVariations() {
-        generator = new AllPossibleGenerator();
+        VariationsGenerator generator = new AllPossibleGenerator();
         List<Variation> variations = generator.generateAllVariations();
         Assertions.assertEquals(GameSpec.getVariationsTotal(), variations.size());
         Assertions.assertEquals(Variation.of(StringUtils.leftPad("", GameSpec.getLength(), "0")), variations.get(0));

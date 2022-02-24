@@ -14,7 +14,7 @@ public class NoSimilarDigitsGenerator implements VariationsGenerator {
         return generateAllVariations(GameSpec.getLength());
     }
 
-    private List<Variation> generateAllVariations(int length) {
+    List<Variation> generateAllVariations(int length) {
         List<Variation> result = new ArrayList<>();
         List<Integer> used = new ArrayList<>();
         iterate(used, length, result);
