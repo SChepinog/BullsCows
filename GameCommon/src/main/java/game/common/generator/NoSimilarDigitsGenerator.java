@@ -5,30 +5,37 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import game.common.GameSpec;
 import game.common.Variation;
 
 public class NoSimilarDigitsGenerator implements VariationsGenerator {
     @Override
-    public List<Variation> generateAllVariations() { //TODO work with different GameSpec.LENGTH
+    public List<Variation> generateAllVariations() {
+        return generateAllVariations(GameSpec.getLength());
+    }
+
+    private List<Variation> generateAllVariations(int length) {
         List<Variation> result = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (j == i) {
-                    continue;
-                }
-                for (int k = 0; k < 10; k++) {
-                    if (k == i || k == j) {
-                        continue;
-                    }
-                    for (int l = 0; l < 10; l++) {
-                        if (l == i || l == j || l == k) {
-                            continue;
-                        }
-                        result.add(Variation.of(StringUtils.join(i, j, k, l, "")));
-                    }
-                }
-            }
-        }
+        List<Integer> used = new ArrayList<>();
+        iterate(used, length, result);
         return result;
+    }
+
+    private void iterate(List<Integer> used, int length, List<Variation> result) {
+        for (int temp = 0; temp < 10; temp++) {
+            if (used.contains(temp)) {
+                continue;
+            } else {
+                used.add(temp);
+            }
+
+            if (used.size() == length) {
+                result.add(Variation.of(StringUtils.join(used, "")));
+            } else {
+                iterate(used, length, result);
+            }
+
+            used.remove((Integer) temp);
+        }
     }
 }

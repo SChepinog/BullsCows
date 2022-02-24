@@ -16,7 +16,8 @@ public class AllPossibleGenerator implements VariationsGenerator {
         return generateAllVariations(0);
     }
 
-    public List<Variation> generateAllVariations(int startInclusive) {
+    @SuppressWarnings("SameParameterValue")
+    private List<Variation> generateAllVariations(int startInclusive) {
         return IntStream.range(startInclusive, GameSpec.getVariationsTotal())
             .mapToObj(String::valueOf)
             .map(s -> StringUtils.leftPad(s, GameSpec.getLength(), "0"))
