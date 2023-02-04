@@ -1,12 +1,12 @@
 package game.active.chooser;
 
-import java.util.List;
-
 import game.common.GameSpec;
 import game.common.Variation;
 import game.common.VariationResultUtils;
 import game.common.VariationsUtils;
 import util.Timer;
+
+import java.util.List;
 
 public class MaxMinChooser implements VariationChooser {
 
@@ -27,7 +27,7 @@ public class MaxMinChooser implements VariationChooser {
         if (variations.size() == 1) {
             return variations.iterator().next();
         }
-        Timer allVariationsTimer = new Timer("bestMaxMinChoice for " + variations.size() + " variations").start();
+        Timer allVariationsTimer = new Timer("Active - bestMaxMinChoice for " + variations.size() + " variations").start();
         Variation result = variations.iterator().next();
         int maxMin = 0;
         for (Variation variationToTest : variations) {
@@ -37,7 +37,7 @@ public class MaxMinChooser implements VariationChooser {
                 result = variationToTest;
             }
         }
-        System.out.println("Active - " + allVariationsTimer.stopAndGetElapsedTimeAsString());
+        allVariationsTimer.printElapsedTime();
         return result;
     }
 

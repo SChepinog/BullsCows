@@ -21,10 +21,10 @@ public class AllGamesMain {
             while (passiveThread.isAlive() || activeThread.isAlive()) {
                 Thread.yield();
             }
-            System.out.println(oneGameTimer.stopAndGetElapsedTimeAsString());
+            oneGameTimer.printElapsedTime();
             Thread.sleep(100);
         }
-        System.out.println(allGames.stopAndGetElapsedTimeAsString());
+        allGames.printElapsedTime();
 
         activeThread.interrupt();
         passiveThread.interrupt();
