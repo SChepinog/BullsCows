@@ -1,13 +1,13 @@
-package ru.bullsncows.passive.passive.service;
+package ru.bullsncows.passive.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.bullsncows.passive.passive.dtos.GameDto;
-import ru.bullsncows.passive.passive.mapper.GameMapper;
-import ru.bullsncows.passive.passive.model.GameModel;
-import ru.bullsncows.passive.passive.model.Move;
-import ru.bullsncows.passive.passive.model.MoveResult;
-import ru.bullsncows.passive.passive.repository.GameRepository;
+import ru.bullsncows.passive.dtos.GameDto;
+import ru.bullsncows.passive.mapper.GameMapper;
+import ru.bullsncows.passive.model.GameModel;
+import ru.bullsncows.passive.model.Move;
+import ru.bullsncows.passive.model.MoveResult;
+import ru.bullsncows.passive.repository.GameRepository;
 
 import java.util.ArrayList;
 import java.util.List;

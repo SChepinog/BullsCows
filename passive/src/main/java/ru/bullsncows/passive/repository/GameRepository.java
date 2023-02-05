@@ -1,6 +1,6 @@
-package ru.bullsncows.passive.passive.repository;
+package ru.bullsncows.passive.repository;
 
-import ru.bullsncows.passive.passive.model.GameModel;
+import ru.bullsncows.passive.model.GameModel;
 
 import java.util.Collection;
 import java.util.UUID;

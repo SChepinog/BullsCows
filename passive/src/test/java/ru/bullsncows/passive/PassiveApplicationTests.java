@@ -1,4 +1,4 @@
-package ru.bullsncows.passive.passive;
+package ru.bullsncows.passive;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

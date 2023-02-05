@@ -1,4 +1,4 @@
-package ru.bullsncows.passive.passive.model;
+package ru.bullsncows.passive.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

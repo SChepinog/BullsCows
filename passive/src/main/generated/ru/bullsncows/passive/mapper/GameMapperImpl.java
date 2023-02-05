@@ -1,14 +1,14 @@
-package ru.bullsncows.passive.passive.mapper;
+package ru.bullsncows.passive.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
-import ru.bullsncows.passive.passive.dtos.GameDto;
-import ru.bullsncows.passive.passive.dtos.MovesDto;
-import ru.bullsncows.passive.passive.model.GameModel;
-import ru.bullsncows.passive.passive.model.Move;
-import ru.bullsncows.passive.passive.model.MoveResult;
+import ru.bullsncows.passive.dtos.MovesDto;
+import ru.bullsncows.passive.model.GameModel;
+import ru.bullsncows.passive.model.MoveResult;
+import ru.bullsncows.passive.dtos.GameDto;
+import ru.bullsncows.passive.model.Move;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",

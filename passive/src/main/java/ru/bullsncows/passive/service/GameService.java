@@ -1,7 +1,7 @@
-package ru.bullsncows.passive.passive.service;
+package ru.bullsncows.passive.service;
 
-import ru.bullsncows.passive.passive.dtos.GameDto;
-import ru.bullsncows.passive.passive.model.Move;
+import ru.bullsncows.passive.dtos.GameDto;
+import ru.bullsncows.passive.model.Move;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package ru.bullsncows.passive.passive;
+package ru.bullsncows.passive;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

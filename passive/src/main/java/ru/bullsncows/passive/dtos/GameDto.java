@@ -1,4 +1,4 @@
-package ru.bullsncows.passive.passive.dtos;
+package ru.bullsncows.passive.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
