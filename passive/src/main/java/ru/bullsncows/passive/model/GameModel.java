@@ -3,7 +3,15 @@ package ru.bullsncows.passive.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,20 +19,20 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@Entity(name = "game")
+@Entity(name = "GameModel")
+@Table(name = "game")
 public class GameModel {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public GameModel(UUID uuid, String secret) {
-        this(uuid, secret, new ArrayList<>());
-    }
-
+    @Column(unique = true)
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID uuid;
 
     private String secret;
 
+    @OneToMany
     private List<Move> moves = new ArrayList<>();
 
 
@@ -38,6 +46,6 @@ public class GameModel {
                 cows++;
             }
         }
-        return new MoveResult(bulls, cows);
+        return new MoveResult(null, bulls, cows, move);
     }
 }

@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
+import ru.bullsncows.passive.dtos.GameDto;
 import ru.bullsncows.passive.dtos.MovesDto;
 import ru.bullsncows.passive.model.GameModel;
-import ru.bullsncows.passive.model.MoveResult;
-import ru.bullsncows.passive.dtos.GameDto;
 import ru.bullsncows.passive.model.Move;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-02-05T19:31:48+0300",
+    date = "2023-02-06T15:39:31+0300",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -41,8 +40,8 @@ public class GameMapperImpl implements GameMapper {
         MovesDto movesDto = new MovesDto();
 
         movesDto.setMove( move.getGuess() );
-        movesDto.setBulls( moveResultBulls( move ) );
-        movesDto.setCows( moveResultCows( move ) );
+        movesDto.setBulls( move.getBulls() );
+        movesDto.setCows( move.getCows() );
 
         return movesDto;
     }
@@ -58,29 +57,5 @@ public class GameMapperImpl implements GameMapper {
         }
 
         return list1;
-    }
-
-    private int moveResultBulls(Move move) {
-        if ( move == null ) {
-            return 0;
-        }
-        MoveResult result = move.getResult();
-        if ( result == null ) {
-            return 0;
-        }
-        int bulls = result.getBulls();
-        return bulls;
-    }
-
-    private int moveResultCows(Move move) {
-        if ( move == null ) {
-            return 0;
-        }
-        MoveResult result = move.getResult();
-        if ( result == null ) {
-            return 0;
-        }
-        int cows = result.getCows();
-        return cows;
     }
 }

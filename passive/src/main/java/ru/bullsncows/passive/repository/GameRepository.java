@@ -11,5 +11,5 @@ public interface GameRepository {
 
     GameModel getOne(UUID uuid);
 
-    Collection<GameModel> getAll();
+    Collection<GameModel> findAll();
 }

@@ -15,11 +15,8 @@ public interface GameMapper {
 
     @Mappings(value = {
             @Mapping(source = "move.guess", target = "move"),
-            @Mapping(source = "move.result.bulls", target = "bulls"),
-            @Mapping(source = "move.result.cows", target = "cows")
-//            @Mapping(target = "move", expression= "java(move.getGuess())"),
-//            @Mapping(target = "bulls", expression = "java(move.getResult().getBulls())"),
-//            @Mapping(target = "cows", expression = "java(move.getResult().getCows())")
+            @Mapping(source = "move.bulls", target = "bulls"),
+            @Mapping(source = "move.cows", target = "cows")
     })
     MovesDto mapToDto(Move move);
 }

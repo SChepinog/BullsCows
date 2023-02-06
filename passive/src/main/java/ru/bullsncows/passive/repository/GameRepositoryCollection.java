@@ -25,7 +25,7 @@ public class GameRepositoryCollection implements GameRepository {
     }
 
     @Override
-    public Collection<GameModel> getAll() {
+    public Collection<GameModel> findAll() {
         return allGames.values();
     }
 }
